@@ -1,45 +1,15 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import Card from '../UI/Card/Card';
 
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
-const Login = () => {
+const Login = (props) => {
 
     const [enteredUsername, setEnteredUsername] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
     const [formIsValid, setFormIsValid] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-
-
-    async function validateUserLogin() {
-        setIsSubmitting(true);
-
-        const headers = { 
-            'Content-Type': 'application/json'
-        };
-        
-        const response = await axios.post(
-            'http://localhost:8080/login', 
-            JSON.stringify({username: enteredUsername, password: enteredPassword}),
-            { headers }
-        )
-        .then(res => {
-            console.log(res);
-            setErrorMessage('');
-            setIsSubmitting(false);
-        })
-        .catch(err => {
-            console.log(err.response.data);
-            console.log(err.response.data.message);
-            setErrorMessage(err.response.data.message);
-            console.log(errorMessage);
-            setIsSubmitting(false);
-        });
-    }
     
 
     const usernameChangeHandler = (event) => {
@@ -60,17 +30,15 @@ const Login = () => {
     };
 
 
-
-    const submitHandler = async (event) => {
+    const submitHandler = (event) => {
         event.preventDefault();
-
-        validateUserLogin();
-
+        props.onLogin(enteredUsername, enteredPassword);
     };
+
 
     return (
         <Card className={classes.login}>
-            { errorMessage && <p className={classes.error}>{errorMessage}</p> }
+            { props.error && <p className={classes.error}>{props.error}</p> }
 
             <form onSubmit={submitHandler}>
                 <div className={classes.control}>
@@ -93,7 +61,7 @@ const Login = () => {
                 </div>
                 <div className={classes.actions}>
                     <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-                        { isSubmitting ? 'Submitting...' : 'Login' }
+                        { props.submitting ? 'Submitting...' : 'Login' }
                     </Button>
                 </div>
             </form>
