@@ -10,6 +10,8 @@ const Login = () => {
     const [enteredUsername, setEnteredUsername] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
     const [formIsValid, setFormIsValid] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     const usernameChangeHandler = (event) => {
@@ -28,7 +30,7 @@ const Login = () => {
             enteredUsername.trim().length > 0 && event.target.value.trim().length >= 6
         );
     };
-
+    
 
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -37,6 +39,8 @@ const Login = () => {
 
     return (
         <Card className={classes.login}>
+            { errorMessage && <p className={classes.error}>{errorMessage}</p> }
+
             <form onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor="username">E-Mail</label>
@@ -58,7 +62,7 @@ const Login = () => {
                 </div>
                 <div className={classes.actions}>
                     <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-                        Login
+                        { isSubmitting ? 'Submitting...' : 'Login' }
                     </Button>
                 </div>
             </form>
