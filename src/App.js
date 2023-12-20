@@ -11,18 +11,18 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    
+
 
     const loginHandler = async (username, password) => {
         
         setIsSubmitting(true);
-        console.log(username, ' -> ', password);
 
         const headers = { 
             'Content-Type': 'application/json'
         };
 
-        const response = await axios.post(
+        
+        await axios.post(
             'http://localhost:8080/login', 
             JSON.stringify({username, password}),
             { headers }
@@ -43,12 +43,17 @@ function App() {
     };
 
 
+    const logoutHandler = () => {
+        setIsLoggedIn(false);
+    };
+
+
     return (
         <React.Fragment>
-            <MainHeader/>
+            <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
             <main>
                 {!isLoggedIn && <Login onLogin={loginHandler} error={errorMessage} submitting={isSubmitting} />}
-                {isLoggedIn && <Home/>}
+                {isLoggedIn && <Home onLogout={logoutHandler} />}
             </main>
         </React.Fragment>
     );
