@@ -17,9 +17,17 @@
 }
 
 .nav a:hover,
-.nav a:active {
-    color: #f3cafb;
+.nav a.active {
+    /* color: #f3cafb; */
+    /* color: #dd0db0; */
+    color: #f9c762;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
 }
+
+/* .nav a[aria-current='page'] {
+    text-decoration: underline;
+} */
 
 .nav button {
     font: inherit;
@@ -38,6 +46,7 @@
 
 .nav button:hover,
 .nav button:active {
-    color: #f3cafb;
+    /* color: #f3cafb; */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.26);
+    text-decoration: underline;
 }
