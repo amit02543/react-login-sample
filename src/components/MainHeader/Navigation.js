@@ -2,9 +2,11 @@ import { Form, NavLink, useRouteLoaderData } from 'react-router-dom';
 
 import classes from './Navigation.module.css';
 
-const Navigation = (props) => {
+const Navigation = () => {
 
-    const token = useRouteLoaderData('root');
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    useRouteLoaderData('root');
 
     return (
         <nav className={classes.nav}>
@@ -20,7 +22,7 @@ const Navigation = (props) => {
                         Home
                     </NavLink>
                 </li>
-                {!token && (
+                {!isLoggedIn && (
                     <li>
                         <NavLink
                             to="/login"
@@ -33,7 +35,7 @@ const Navigation = (props) => {
                         </NavLink>
                     </li>
                 )}
-                {!token && (
+                {!isLoggedIn && (
                     <li>
                         <NavLink
                         to="/register"
@@ -46,24 +48,34 @@ const Navigation = (props) => {
                         </NavLink>
                     </li>
                 )}
-                {/* {!props.isLoggedIn && (
-                <li>
-                    <a href="/register">Register</a>
-                </li>
-                )} */}
-                {token && (
-                <li>
-                    <a href="/collection">Collection</a>
-                </li>
-                )}
-                {token && (
-                <li>
-                    <a href="/profile">Profile</a>
-                </li>
-                )}
-                {token && (
+                {isLoggedIn && (
                     <li>
-                        {/* <button onClick={props.onLogout}>Logout</button> */}
+                        <NavLink
+                        to="/collection"
+                        className={({ isActive }) =>
+                            isActive ? classes.active : undefined
+                        }
+                        end
+                        >
+                        Collection
+                        </NavLink>
+                    </li>
+                )}
+                {isLoggedIn && (
+                    <li>
+                        <NavLink
+                            to="/profile"
+                            className={({ isActive }) =>
+                                isActive ? classes.active : undefined
+                            }
+                            end
+                        >
+                        Profile
+                        </NavLink>
+                    </li>
+                )}
+                {isLoggedIn && (
+                    <li>
                         <Form action="/logout" method="post">
                             <button>Logout</button>
                         </Form>
