@@ -149,10 +149,10 @@ const Register = () => {
                     />
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor="password">Confirm Password</label>
+                    <label htmlFor="cpassword">Confirm Password</label>
                     <input
                         type="password"
-                        id="password"
+                        id="cpassword"
                         value={enteredConfirmPassword}
                         onChange={confirmPasswordChangeHandler}
                     />

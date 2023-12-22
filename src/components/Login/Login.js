@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
+import { Form, Link, useActionData, useNavigation } from 'react-router-dom';
 
+import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 
 import classes from './Login.module.css';
-import Button from '../UI/Button/Button';
 
-const Login = (props) => {
+const Login = () => {
+
+    const data = useActionData();
+
+    const navigation = useNavigation();
 
     const [enteredUsername, setEnteredUsername] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
     const [formIsValid, setFormIsValid] = useState(false);
+
+    const isSubmitting = navigation.state === 'submitting';
     
 
     const usernameChangeHandler = (event) => {
@@ -30,22 +37,27 @@ const Login = (props) => {
     };
 
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        props.onLogin(enteredUsername, enteredPassword);
-    };
-
-
     return (
         <Card className={classes.login}>
-            { props.error && <p className={classes.error}>{props.error}</p> }
+            { 
+                data && data.errors && <ul>
+                    {
+                    Object.values(data.errors).map( err => (
+                        <li key={err}>{err}</li>
+                    ))
+                    }
+                </ul>
+            }
 
-            <form onSubmit={submitHandler}>
+            { data && data.message && <p className={classes.error}>{data.message}</p> }
+
+            <Form method='post'>
                 <div className={classes.control}>
-                    <label htmlFor="username">E-Mail</label>
+                    <label htmlFor="username">Username</label>
                     <input
                         type="text"
                         id="username"
+                        name="username"
                         value={enteredUsername}
                         onChange={usernameChangeHandler}
                     />
@@ -55,16 +67,20 @@ const Login = (props) => {
                     <input
                         type="password"
                         id="password"
+                        name="password"
                         value={enteredPassword}
                         onChange={passwordChangeHandler}
                     />
                 </div>
                 <div className={classes.actions}>
                     <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-                        { props.submitting ? 'Submitting...' : 'Login' }
+                        { isSubmitting ? 'Submitting...' : 'Login' }
                     </Button>
+                    <Link to='/' className={classes.cancel}>
+                        Cancel
+                    </Link>
                 </div>
-            </form>
+            </Form>
         </Card>
     );
 };

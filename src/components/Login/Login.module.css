@@ -51,6 +51,13 @@
     color: red;
 }
 
+.cancel {
+    color: #741188;
+    font-size: 1.15rem;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
 @media (min-width: 768px) {
     .control {
         align-items: center;
