@@ -28,3 +28,12 @@ button:active:disabled {
     color: #666666;
     cursor: not-allowed;
 }
+
+button[type='link'],
+button[type='link']:hover,
+button[type='link']:active,
+button[type='link']:focus {
+    background: none;
+    border: none;
+    color: #4f005f;
+}

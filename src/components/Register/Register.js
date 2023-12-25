@@ -45,7 +45,6 @@ const Register = () => {
             setErrorMessage('');
             setIsSubmitting(false);
             setMessage(res.data.message);
-            return redirect('/'); //This is not working
         })
         .catch(err => {
             console.log(err.response.data);

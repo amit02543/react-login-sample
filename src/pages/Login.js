@@ -45,6 +45,7 @@ export async function action({ request }) {
     const resData = await response.json();
   
     localStorage.setItem('isLoggedIn', true);
+    localStorage.setItem('user', resData.username);
 
   
     return redirect('/');
