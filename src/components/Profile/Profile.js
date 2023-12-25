@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, redirect } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import axios from 'axios';
 
@@ -11,10 +11,13 @@ import Button from '../UI/Button/Button';
 const Profile = ({ data }) => {
 
     const [enteredUsername, setEnteredUsername] = useState(data.username);
+    const [enteredProfileUrl, setEnteredProfileUrl] = useState(data.profileUrl);
     const [enteredName, setEnteredName] = useState(data.name ? data.name : '');
     const [enteredPronoun, setEnteredPronoun] = useState(data.pronoun ? data.pronoun : '');
     const [enteredEmail, setEnteredEmail] = useState(data.email ? data.email : '');
     const [isFormEditable, setIsFormEditable] = useState(false);
+    const [isFileSelector, setIsFileSelector] = useState(false);
+    const [file, setFile] = useState('');
     const [formIsValid, setFormIsValid] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [message, setMessage] = useState('');
@@ -98,27 +101,104 @@ const Profile = ({ data }) => {
 
     const editFormHandler = () => {
         setIsFormEditable(true);
-    }
+    };
 
 
     const onCancelHandler = event => {
         event.preventDefault();
         setIsFormEditable(false);
-    }
+    };
+
+
+    const updateProfilePictureHandler = () => {
+        setIsFileSelector(true);
+    };
+
+
+    const onImageChangeHandler = event => {
+        setFile(event.target.files[0]);
+    };
+
+
+    const onImageUploadHandler = async event => {
+        event.preventDefault();
+        console.log(file);
+
+        const username = localStorage.getItem('user');
+
+        var formData = new FormData();
+        formData.append('image', file);
+
+        await axios.post(
+            `http://localhost:8080/profile/${username}/upload-image`, 
+            formData, 
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        )
+        .then(res => {
+            console.log(res);
+            setErrorMessage('');
+            setIsSubmitting(false);
+            setMessage(res.data.message);
+            setEnteredProfileUrl(res.data.profileUrl);
+            setIsFileSelector(false);
+        })
+        .catch(err => {
+            console.log(err.response.data);
+            setErrorMessage(err.response.data.message);
+            setIsSubmitting(false);
+            setIsFileSelector(false);
+        });
+        
+    };
+
+
+    const onUploadCancelHandler = () => {
+        setIsFileSelector(false);
+    };
 
 
     return (
-        <Card className={classes.profile}>
+        <>
+            { isFileSelector && 
+                <div className={classes.overlay}>
+                    <div className={classes.control}>
+                        <input type="file" id="myfile" name="myfile" onChange={onImageChangeHandler} />
+                    </div>
+                    <div className={classes.actions}>
+                        <Button type="submit" className={classes.btn} onClick={onImageUploadHandler}>
+                            Upload
+                        </Button>
+                        <Button type='link' className={classes.link} onClick={onUploadCancelHandler}>
+                            Cancel
+                        </Button>                   
+                    </div>
+                </div>
+            }
+
+            <Card className={classes.profile}>
+
+            <div>
+                <div className={`${classes.w100} ${classes.profilePic}`}>
+                    { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
+                    { !enteredProfileUrl && <FaUser /> }
+                    <span onClick={updateProfilePictureHandler}><b>Update</b></span>
+                </div>
+            </div>
 
             { message && <p className={classes.success}>{message}</p>}
 
             { errorMessage && <p className={classes.error}>{errorMessage}</p> }
 
+            <div className={`${classes.control} ${!isFormEditable ? '' : classes.hidden}`}>
+                <MdEdit onClick={editFormHandler} />
+            </div>
+
             { !isFormEditable && 
                 <div>
-                    <div className={classes.control}>
-                        <MdEdit onClick={editFormHandler} />
-                    </div>
                     <div className={classes.control}>
                         <label>Username</label>
                         <span className={classes.readOnly}>{enteredUsername}</span>
@@ -143,12 +223,6 @@ const Profile = ({ data }) => {
                 <form onSubmit={submitHandler}>
                     <div className={classes.control}>
                         <label htmlFor="username">Username</label>
-                        {/* <input
-                            type="text"
-                            id="username"
-                            value={data.username}
-                            readOnly
-                        /> */}
                         <span className={classes.readOnly}>{enteredUsername}</span>
                     </div>
                     <div className={classes.control}>
@@ -162,18 +236,6 @@ const Profile = ({ data }) => {
                     </div>
                     <div className={classes.control}>
                         <label htmlFor="name">Pronoun</label>
-                        {/* <input
-                            type="text"
-                            id="pronoun"
-                            value={data.pronoun}
-                            onChange={pronounChangeHandler}
-                        /> */}
-                        {/* <input list="pronoun" name="pronoun" onChange={pronounChangeHandler} />
-                        <datalist id="pronoun">
-                            <option value="" />
-                            <option value="He" />
-                            <option value="She" />
-                        </datalist> */}
                         <select 
                             name="pronoun" 
                             id="pronoun" 
@@ -204,7 +266,8 @@ const Profile = ({ data }) => {
                     </div>
                 </form>
             }
-        </Card>        
+            </Card>  
+        </>      
     );
 };
 
