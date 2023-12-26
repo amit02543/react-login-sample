@@ -3,10 +3,10 @@ import { FaUser } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import axios from 'axios';
 
+import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 
 import classes from './Profile.module.css';
-import Button from '../UI/Button/Button';
 
 const Profile = ({ data }) => {
 
@@ -23,6 +23,19 @@ const Profile = ({ data }) => {
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const pronounJson = {
+        "": "",
+        "he": "He/him/his",
+        "she": "She/her/hers",
+        "they": "They/them/their",
+        "neither": "Neither"
+    }
+
+
+    const pronounOptions = Object.keys(pronounJson).map(key => {
+        return <option key={key} value={pronounJson[key]}>{pronounJson[key]}</option>
+    });
+    
 
     const updateProfile = async () => {
         setIsSubmitting(true);
@@ -73,7 +86,7 @@ const Profile = ({ data }) => {
 
     const pronounChangeHandler = event => {
         setEnteredPronoun(event.target.value);
-    
+
         setFormIsValid(
             enteredName.trim().length > 2
                 && enteredEmail.includes('@')
@@ -242,9 +255,7 @@ const Profile = ({ data }) => {
                             onChange={pronounChangeHandler}
                             value={enteredPronoun}
                         >
-                            <option key="" value=""></option>
-                            <option key="he" value="he">He</option>
-                            <option key="she" value="she">She</option>
+                            {pronounOptions}
                         </select>
                     </div>
                     <div className={classes.control}>

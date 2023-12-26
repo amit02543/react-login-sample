@@ -7,6 +7,7 @@ import Login, { action as loginAction } from './pages/Login';
 import Profile, { loader as profileLoader } from './pages/Profile';
 import Register from './pages/Register';
 import { action as logoutAction } from './pages/Logout';
+import SearchPage from './pages/Search';
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />
+      },
+      {
+        path: 'search',
+        element: <SearchPage />
       },
       {
         path: 'profile',

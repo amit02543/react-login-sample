@@ -13,11 +13,11 @@ const Navigation = () => {
             <ul>
                 <li>
                     <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                            isActive ? classes.active : undefined
-                        }
-                        end
+                            to="/"
+                            className={({ isActive }) =>
+                                isActive ? classes.active : undefined
+                            }
+                            end
                         >
                         Home
                     </NavLink>
@@ -30,19 +30,19 @@ const Navigation = () => {
                                 isActive ? classes.active : undefined
                             }
                             end
-                            >
-                            Login
+                        >
+                        Login
                         </NavLink>
                     </li>
                 )}
                 {!isLoggedIn && (
                     <li>
                         <NavLink
-                        to="/register"
-                        className={({ isActive }) =>
-                            isActive ? classes.active : undefined
-                        }
-                        end
+                            to="/register"
+                            className={({ isActive }) =>
+                                isActive ? classes.active : undefined
+                            }
+                            end
                         >
                         Register
                         </NavLink>
@@ -51,13 +51,13 @@ const Navigation = () => {
                 {isLoggedIn && (
                     <li>
                         <NavLink
-                        to="/collection"
-                        className={({ isActive }) =>
-                            isActive ? classes.active : undefined
-                        }
-                        end
+                            to="/search"
+                            className={({ isActive }) =>
+                                isActive ? classes.active : undefined
+                            }
+                            end
                         >
-                        Collection
+                        Search
                         </NavLink>
                     </li>
                 )}
