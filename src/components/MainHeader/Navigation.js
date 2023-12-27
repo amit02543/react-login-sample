@@ -1,6 +1,7 @@
 import { Form, NavLink, useRouteLoaderData } from 'react-router-dom';
 
 import classes from './Navigation.module.css';
+import Mode from '../UI/Mode/Mode';
 
 const Navigation = () => {
 
@@ -11,6 +12,9 @@ const Navigation = () => {
     return (
         <nav className={classes.nav}>
             <ul>
+                <li>
+                    <Mode />
+                </li>
                 <li>
                     <NavLink
                             to="/"
