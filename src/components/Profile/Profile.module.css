@@ -79,10 +79,6 @@
     padding-left: 30px;
 }
 
-.center {
-    text-align: center;
-}
-
 .control input[readOnly],
 .control input[readOnly]:focus,
 .control span.readOnly,

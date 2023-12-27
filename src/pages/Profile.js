@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { useLoaderData, json, defer, Await } from 'react-router-dom';
 
+import PageContent from '../components/PageContent/PageContent';
 import Profile from '../components/Profile/Profile';
 
 function ProfilePage() {
@@ -10,7 +11,11 @@ function ProfilePage() {
     return (
         <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
             <Await resolve={events}>
-                {(response) => <Profile data={response} />}
+                { response => (
+                    <PageContent title="Your Profile">
+                        <Profile data={response} />
+                    </PageContent>
+                )}
             </Await>
         </Suspense>
     );

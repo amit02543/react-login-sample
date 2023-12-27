@@ -55,12 +55,37 @@
     color: red;
 }
 
+.w70 {
+    width: 70%;
+}
+
+.w25 {
+    width: 25%;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.marTop30 {
+    margin-top: 30px;
+}
+
 .cancel {
     color: #741188;
     font-size: 1.15rem;
     text-decoration: none;
     padding-left: 30px;
 }
+
+hr {
+    margin-bottom: 30px;;
+}
+
 
 @media (min-width: 768px) {
     .control {
