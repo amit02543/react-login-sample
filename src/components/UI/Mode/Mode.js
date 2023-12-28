@@ -16,12 +16,20 @@ const Mode = () => {
         if(event.target.checked) {
             localStorage.setItem('spotify-mode', event.target.checked);
             setCheckedValue(true);
+            document.body.className = 'dark';
         } else {
             localStorage.removeItem('spotify-mode');
             setCheckedValue(false);
+            document.body.className = '';
         }
+
         
     };
+
+
+    useEffect(() => {
+        document.body.className = checkedValue ? 'dark' : '';
+    });
 
 
     return (

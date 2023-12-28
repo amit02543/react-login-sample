@@ -1,7 +1,8 @@
 import { Form, NavLink, useRouteLoaderData } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
 
 import classes from './Navigation.module.css';
-import Mode from '../UI/Mode/Mode';
+
 
 const Navigation = () => {
 
@@ -12,9 +13,6 @@ const Navigation = () => {
     return (
         <nav className={classes.nav}>
             <ul>
-                <li>
-                    <Mode />
-                </li>
                 <li>
                     <NavLink
                             to="/"
@@ -65,7 +63,7 @@ const Navigation = () => {
                         </NavLink>
                     </li>
                 )}
-                {isLoggedIn && (
+                {/* {isLoggedIn && (
                     <li>
                         <NavLink
                             to="/profile"
@@ -77,14 +75,57 @@ const Navigation = () => {
                         Profile
                         </NavLink>
                     </li>
-                )}
+                )} */}
                 {isLoggedIn && (
+                    <li className={classes.dp}>
+                        <NavLink
+                            to="/search"
+                            className={({ isActive }) =>
+                                isActive ? classes.active : undefined
+                            }
+                            onClick={e => e.preventDefault()}
+                            end
+                        >
+                        <FaUser />
+                        </NavLink>
+                        <ul>
+                            <li>
+                                <NavLink
+                                    to="/profile"
+                                    className={({ isActive }) =>
+                                        isActive ? classes.active : undefined
+                                    }
+                                    end
+                                >
+                                Profile
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/settings"
+                                    className={({ isActive }) =>
+                                        isActive ? classes.active : undefined
+                                    }
+                                    end
+                                >
+                                Settings
+                                </NavLink>
+                            </li>
+                            <li>
+                                <Form action="/logout" method="post">
+                                    <button>Logout</button>
+                                </Form>
+                            </li>
+                        </ul>
+                    </li>
+                )}
+                {/* {isLoggedIn && (
                     <li>
                         <Form action="/logout" method="post">
                             <button>Logout</button>
                         </Form>
                     </li>
-                )}
+                )} */}
             </ul>
         </nav>
     );

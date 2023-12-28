@@ -3,11 +3,12 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
 import RootLayout from './pages/Root';
-import Login, { action as loginAction } from './pages/Login';
-import Profile, { loader as profileLoader } from './pages/Profile';
-import Register from './pages/Register';
+import LoginPage, { action as loginAction } from './pages/Login';
+import ProfilePage, { loader as profileLoader } from './pages/Profile';
+import RegisterPage from './pages/Register';
 import { action as logoutAction } from './pages/Logout';
 import SearchPage from './pages/Search';
+import SettingsPage from './pages/Settings';
 
 
 const router = createBrowserRouter([
@@ -23,12 +24,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <Login />,
+        element: <LoginPage />,
         action: loginAction
       },
       {
         path: 'register',
-        element: <Register />
+        element: <RegisterPage />
       },
       {
         path: 'search',
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />,
+        element: <ProfilePage />,
         loader: profileLoader
+      },
+      {
+        path: 'settings',
+        element: <SettingsPage />
       },
       {
         path: 'logout',
