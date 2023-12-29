@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaDiamond } from "react-icons/fa6";
 
-import classes from './Track.module.css';
+import classes from './Search.module.css';
 
 const Track = ({ track }) => {
 
@@ -17,7 +17,7 @@ const Track = ({ track }) => {
             <div className=''>
                 <h4>{track.title}</h4>
                 <p className={classes.small}>{track.album}</p>
-                <ul className={classes.artists}>{artists}</ul>
+                <ul className={classes.itemlist}>{artists}</ul>
                 <p>
                     <span><b>Release Date: </b>{track.releaseDate}</span>
                     <FaDiamond />

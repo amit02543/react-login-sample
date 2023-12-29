@@ -17,19 +17,30 @@
   --card-boxShadow-light: 0 2px 8px rgba(0, 0, 0, 0.26);
   --card-boxShadow-dark: 0 2px 8px rgba(255, 255, 255, 0.26);
 
+  --input-active-border-light: #4f005f;
+  --input-active-border-dark: #333;
+  --input-active-bg-light: #f6dbfc;
+  --input-active-bg-dark: #666;
+  --input-active-color-light: #000;
+  --input-active-color-dark: #fff;
+
   --button-color-light: #fff;
   --button-bg-light: #4f005f;
   --button-bg-hover-light: #741188;
   --button-disable-color-light: #666;
   --button-disable-bg-light: #ccc;
 
-  --input-active-border-light: #4f005f;
-  --input-active-border-dark: #333;
-  --input-active-bg-light: #f6dbfc;
-  --input-active-bg-dark: #666;
+  --button-color-dark: #2b2b2b;
+  --button-bg-dark: #fff;
+  --button-bg-hover-dark: #d8dbe0;
+  --button-disable-color-dark: #666;
+  --button-disable-bg-dark: #ccc;
 
   --link-color-light: #4f005f;
   --link-color-dark: #ccc;
+
+  --itemlist-bg-light: #e6e6e6;
+  --itemlist-bg-dark: #3C3F41;
 }
 
 * {
@@ -52,9 +63,19 @@ body {
   --header-color: var(--header-color-light);
   --card-bg: var(--card-background-light);
   --card-boxShadow: var(--card-boxShadow-light);
+
   --input-active-border: var(--input-active-border-light);
   --input-active-bg: var(--input-active-bg-light);
+  --input-active-color: var(--input-active-color-light);
+
+  --button-color: var(--button-color-light);
+  --button-bg: var(--button-bg-light);
+  --button-bg-hover: var(--button-bg-hover-light);
+  --button-disable-color: var(--button-disable-color-light);
+  --button-disable-bg: var(--button-disable-bg-light);
   --link-color: var(--link-color-light);
+
+  --itemlist-bg: var(--itemlist-bg-light);
 }
 
 body.dark {
@@ -66,9 +87,19 @@ body.dark {
   --primary-color: #2B2B2B;
   --card-bg: var(--card-background-dark);
   --card-boxShadow: var(--card-boxShadow-dark);
+
   --input-active-border: var(--input-active-border-dark);
   --input-active-bg: var(--input-active-bg-dark);
+  --input-active-color: var(--input-active-color-dark);
+
+  --button-color: var(--button-color-dark);
+  --button-bg: var(--button-bg-dark);
+  --button-bg-hover: var(--button-bg-hover-dark);
+  --button-disable-color: var(--button-disable-color-dark);
+  --button-disable-bg: var(--button-disable-bg-dark);
   --link-color: var(--link-color-dark);
+
+  --itemlist-bg: var(--itemlist-bg-dark);
 }
 
 .fsSmall {
@@ -86,4 +117,57 @@ body.dark {
 main {
   margin-top: 5rem;
   padding-top: 1rem;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.floatLeft {
+  float: left;
+}
+
+.floatRight {
+  float: right;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.marTop30 {
+  margin-top: 2rem;
+}
+
+.marRight5p {
+  margin-right: 5% !important;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.success {
+  color: #9906b6;
+}
+
+.error {
+  color: red;
+}
+
+.cancel {
+  color: var(--link-color);
+  font-size: 1.15rem;
+  text-decoration: none;
+  padding-left: 2rem;
 }

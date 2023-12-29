@@ -9,6 +9,8 @@ import classes from './Search.module.css';
 import Artist from './Artist';
 import Album from './Album';
 import Track from './Track';
+import Input from '../UI/Input/Input';
+import Select from '../UI/Input/Select';
 
 const Search = () => {
 
@@ -106,8 +108,7 @@ const Search = () => {
             { errorMessage && <p className={classes.error}>{errorMessage}</p> }
 
             <form onSubmit={submitHandler}>
-                <div className={`${classes.control} ${classes.w70} ${classes.floatLeft}`}>
-                    {/* <label htmlFor="search">Query</label> */}
+                {/* <div className={`${classes.control} ${classes.w70} ${classes.floatLeft}`}>
                     <input
                         type="text"
                         id="search"
@@ -117,7 +118,6 @@ const Search = () => {
                     />
                 </div>
                 <div className={`${classes.control} ${classes.w25} ${classes.floatRight}`}>
-                    {/* <label htmlFor="type">Type</label> */}
                     <select 
                         name="type" 
                         id="type" 
@@ -126,12 +126,31 @@ const Search = () => {
                     >
                         {searchTypeOptions}
                     </select>
+                </div> */}
+                <div className={classes.row}>
+                    <Input
+                        type="text"
+                        id="search"
+                        name="search"
+                        placeholder="Search query here"
+                        value={enteredQuery}
+                        onChange={queryChangeHandler}
+                        class="w70 marRight5p"
+                    />
+                    <Select
+                        id="type"
+                        name="type"
+                        value={selectedType}
+                        onChange={typeChangeHandler}
+                        options={searchTypeOptions}
+                        class="w25"
+                    />
                 </div>
-                <div className={classes.actions}>
+                <div className='actions'>
                     <Button type="submit" className={classes.btn} disabled={!formIsValid}>
                         { isSubmitting ? 'Submitting...' : 'Search' }
                     </Button>
-                    <Link to='/' className={classes.cancel}>
+                    <Link to='/' className='cancel'>
                         Cancel
                     </Link>
                 </div>

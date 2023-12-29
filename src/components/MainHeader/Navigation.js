@@ -80,7 +80,7 @@ const Navigation = () => {
                 {isLoggedIn && (
                     <li className={classes.dp}>
                         <NavLink
-                            to="/search"
+                            to=""
                             className={({ isActive }) =>
                                 isActive ? classes.active : undefined
                             }

@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaDiamond } from "react-icons/fa6";
 
-import classes from './Album.module.css';
+import classes from './Search.module.css';
 
 const Album = ({ album }) => {
 
@@ -16,7 +16,7 @@ const Album = ({ album }) => {
 
             <div className=''>
                 <h4>{album.name}</h4>
-                <ul className={classes.artists}>{artists}</ul>
+                <ul className={classes.itemlist}>{artists}</ul>
                 <p>
                     <span><b>Release Date: </b>{album.releaseDate}</span>
                     <FaDiamond />

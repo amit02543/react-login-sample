@@ -5,6 +5,7 @@ import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 
 import classes from './Login.module.css';
+import Input from '../UI/Input/Input';
 
 const Login = () => {
 
@@ -52,7 +53,7 @@ const Login = () => {
             { data && data.message && <p className={classes.error}>{data.message}</p> }
 
             <Form method='post'>
-                <div className={classes.control}>
+                {/* <div className={classes.control}>
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -71,12 +72,30 @@ const Login = () => {
                         value={enteredPassword}
                         onChange={passwordChangeHandler}
                     />
-                </div>
-                <div className={classes.actions}>
+                </div> */}
+                <Input
+                    label="Username"
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={enteredUsername}
+                    onChange={usernameChangeHandler}
+                    class=''
+                />
+                <Input
+                    label="Password"
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={enteredPassword}
+                    onChange={passwordChangeHandler}
+                    class=''
+                />
+                <div className='actions'>
                     <Button type="submit" className={classes.btn} disabled={!formIsValid}>
                         { isSubmitting ? 'Submitting...' : 'Login' }
                     </Button>
-                    <Link to='/' className={classes.cancel}>
+                    <Link to='/' className='cancel'>
                         Cancel
                     </Link>
                 </div>

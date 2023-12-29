@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaDiamond } from "react-icons/fa6";
 
-import classes from './Artist.module.css';
+import classes from './Search.module.css';
 
 const Artist = ({ artist }) => {
 
@@ -16,7 +16,7 @@ const Artist = ({ artist }) => {
 
             <div className=''>
                 <h4>{artist.name}</h4>
-                <ul className={classes.genres}>{genres}</ul>
+                <ul className={classes.itemlist}>{genres}</ul>
                 <p>
                     <span><b>Followers: </b>{artist.followers.toLocaleString()}</span>
                     <FaDiamond />

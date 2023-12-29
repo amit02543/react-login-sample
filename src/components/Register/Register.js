@@ -6,6 +6,7 @@ import Card from '../UI/Card/Card';
 
 import classes from './Register.module.css';
 import Button from '../UI/Button/Button';
+import Input from '../UI/Input/Input';
 
 const Register = () => {
 
@@ -120,7 +121,7 @@ const Register = () => {
             { errorMessage && <p className={classes.error}>{errorMessage}</p> }
 
             <form onSubmit={submitHandler}>
-                <div className={classes.control}>
+                {/* <div className={classes.control}>
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -155,12 +156,52 @@ const Register = () => {
                         value={enteredConfirmPassword}
                         onChange={confirmPasswordChangeHandler}
                     />
-                </div>
-                <div className={classes.actions}>
+                </div> */}
+                <Input
+                    label="Username"
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username here"
+                    value={enteredUsername}
+                    onChange={usernameChangeHandler}
+                    class=''
+                />
+                <Input
+                    label="E-Mail"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter email here"
+                    value={enteredEmail}
+                    onChange={emailChangeHandler}
+                    class=''
+                />
+                <Input
+                    label="Password"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password here"
+                    value={enteredPassword}
+                    onChange={passwordChangeHandler}
+                    class=''
+                />
+                <Input
+                    label="Confirm Password"
+                    type="password"
+                    id="cpassword"
+                    name="cpassword"
+                    placeholder="Enter confirm password here"
+                    value={enteredConfirmPassword}
+                    onChange={confirmPasswordChangeHandler}
+                    class=''
+                />
+                <div className='actions'>
                     <Button type="submit" className={classes.btn} disabled={!formIsValid}>
                         { isSubmitting ? 'Submitting...' : 'Register' }
                     </Button>
-                    <Link to='/' className={classes.cancel}>
+                    <Link to='/' className='cancel'>
                         Cancel
                     </Link>
                 </div>

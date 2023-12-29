@@ -5,8 +5,10 @@ import axios from 'axios';
 
 import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
+import Input from '../UI/Input/Input';
 
 import classes from './Profile.module.css';
+import Select from '../UI/Input/Select';
 
 const Profile = ({ data }) => {
 
@@ -182,7 +184,7 @@ const Profile = ({ data }) => {
                     <div className={classes.control}>
                         <input type="file" id="myfile" name="myfile" onChange={onImageChangeHandler} />
                     </div>
-                    <div className={classes.actions}>
+                    <div className='actions'>
                         <Button type="submit" className={classes.btn} onClick={onImageUploadHandler}>
                             Upload
                         </Button>
@@ -207,13 +209,13 @@ const Profile = ({ data }) => {
 
             { errorMessage && <p className={classes.error}>{errorMessage}</p> }
 
-            <div className={`${classes.control} ${!isFormEditable ? '' : classes.hidden}`}>
+            <div className={`${classes.control} ${!isFormEditable ? 'textRight marTop30' : classes.hidden}`}>
                 <MdEdit onClick={editFormHandler} />
             </div>
 
             { !isFormEditable && 
                 <div>
-                    <div className={classes.control}>
+                    {/* <div className={classes.control}>
                         <label>Username</label>
                         <span className={classes.readOnly}>{enteredUsername}</span>
                     </div>
@@ -228,14 +230,50 @@ const Profile = ({ data }) => {
                     <div className={classes.control}>
                         <label>Email</label>
                         <span className={classes.readOnly}>{enteredEmail}</span>
-                    </div>
+                    </div> */}
+                    <Input
+                        label="Username"
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={enteredUsername}
+                        class=''
+                        readonly={true}
+                    />
+                    <Input
+                        label="Name"
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={enteredName}
+                        class=''
+                        readonly={true}
+                    />
+                    <Input
+                        label="Pronoun"
+                        type="text"
+                        id="pronoun"
+                        name="pronoun"
+                        value={enteredPronoun}
+                        class=''
+                        readonly={true}
+                    />
+                    <Input
+                        label="Email"
+                        type="text"
+                        id="email"
+                        name="email"
+                        value={enteredEmail}
+                        class=''
+                        readonly={true}
+                    />
                 </div>
             }
 
             { isFormEditable && 
 
                 <form onSubmit={submitHandler}>
-                    <div className={classes.control}>
+                    {/* <div className={classes.control}>
                         <label htmlFor="username">Username</label>
                         <span className={classes.readOnly}>{enteredUsername}</span>
                     </div>
@@ -267,8 +305,44 @@ const Profile = ({ data }) => {
                             value={enteredEmail}
                             onChange={emailChangeHandler}
                         />
-                    </div>
-                    <div className={classes.actions}>
+                    </div> */}
+                    <Input
+                        label="Username"
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={enteredUsername}
+                        class=''
+                        readonly={true}
+                    />
+                    <Input
+                        label="Name"
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={enteredName}
+                        onChange={nameChangeHandler}
+                        class=''
+                    />
+                    <Select
+                        label="Pronoun"
+                        id="pronoun"
+                        name="pronoun"
+                        value={enteredPronoun}
+                        onChange={pronounChangeHandler}
+                        options={pronounOptions}
+                        class=''
+                    />
+                    <Input
+                        label="E-Mail"
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={enteredEmail}
+                        onChange={emailChangeHandler}
+                        class=''
+                    />
+                    <div className='actions'>
                         <Button type="submit" className={classes.btn} disabled={!formIsValid}>
                             { isSubmitting ? 'Submitting...' : 'Update' }
                         </Button>

@@ -5,7 +5,7 @@
     padding: 2rem;
 }
 
-.control {
+/* .control {
     margin: 1rem 0;
     display: flex;
     align-items: stretch;
@@ -41,9 +41,9 @@
 .control.invalid input {
     border-color: red;
     background: #fbdada;
-}
+} */
 
-.actions {
+/* .actions {
     text-align: center;
 }
 
@@ -56,16 +56,16 @@
 }
 
 .cancel {
-    color: #741188;
+    color: var(--link-color);
     font-size: 1.15rem;
     text-decoration: none;
     padding-left: 30px;
-}
+} */
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .control {
         align-items: center;
         flex-direction: row;
     }
 
-}
+} */
