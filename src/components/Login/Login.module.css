@@ -20,7 +20,8 @@
 .control label {
     font-weight: bold;
     flex: 1;
-    color: #464646;
+    /* color: #464646; */
+    color: var(--color);
     margin-bottom: 0.5rem;
 }
 
@@ -34,8 +35,10 @@
 
 .control input:focus {
     outline: none;
-    border-color: #4f005f;
-    background: #f6dbfc;
+    /* border-color: #4f005f; */
+    /* background: #f6dbfc; */
+    border-color: var(--input-active-border);
+    background: var(--input-active-bg);
 }
 
 .control.invalid input {
@@ -52,7 +55,8 @@
 }
 
 .cancel {
-    color: #741188;
+    /* color: #741188; */
+    color: var(--link-color);
     font-size: 1.15rem;
     text-decoration: none;
     padding-left: 30px;

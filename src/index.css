@@ -1,16 +1,89 @@
+:root {
+  --light: #d8dbe0;
+  --dark: #28292c;
+  --active: #f9c762;
+
+  --font-color-light: #28292c;
+  --font-color-dark: #ccc;
+
+  --header-color-light: #741188;
+  --header-color-dark: #2B2B2B;
+
+  --body-background-light: #fff;
+  --body-background-dark: #3C3F41;
+
+  --card-background-light: #fff;
+  --card-background-dark: #333;
+  --card-boxShadow-light: 0 2px 8px rgba(0, 0, 0, 0.26);
+  --card-boxShadow-dark: 0 2px 8px rgba(255, 255, 255, 0.26);
+
+  --button-color-light: #fff;
+  --button-bg-light: #4f005f;
+  --button-bg-hover-light: #741188;
+  --button-disable-color-light: #666;
+  --button-disable-bg-light: #ccc;
+
+  --input-active-border-light: #4f005f;
+  --input-active-border-dark: #333;
+  --input-active-bg-light: #f6dbfc;
+  --input-active-bg-dark: #666;
+
+  --link-color-light: #4f005f;
+  --link-color-dark: #ccc;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
   font-family: sans-serif;
-  background: #fff;
+  /* background: #fff; */
 }
 
 body {
   margin: 0;
+  /* background-color: #fff; */
+  background-color: var(--body-background-light);
+  --bg-color: var(--body-background-light);
+  /* height: 100vw; */
+  color: var(--font-color-light);
+  --primary-color: var(--light);
+  --header-color: var(--header-color-light);
+  --card-bg: var(--card-background-light);
+  --card-boxShadow: var(--card-boxShadow-light);
+  --input-active-border: var(--input-active-border-light);
+  --input-active-bg: var(--input-active-bg-light);
+  --link-color: var(--link-color-light);
+}
+
+body.dark {
+  /* background-color: #3C3F41; */
+  background-color: var(--body-background-dark);
+  --bg-color: var(--body-background-dark);
+  color: var(--font-color-dark);
+  --header-color: var(--header-color-dark);
+  --primary-color: #2B2B2B;
+  --card-bg: var(--card-background-dark);
+  --card-boxShadow: var(--card-boxShadow-dark);
+  --input-active-border: var(--input-active-border-dark);
+  --input-active-bg: var(--input-active-bg-dark);
+  --link-color: var(--link-color-dark);
+}
+
+.fsSmall {
+  font-size: 12px;
+}
+
+.fsNormal {
+  font-size: 16px;
+}
+
+.fsBig {
+  font-size: 20px;
 }
 
 main {
-  margin-top: 6rem;
+  margin-top: 5rem;
+  padding-top: 1rem;
 }
