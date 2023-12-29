@@ -37,7 +37,6 @@ async function loadProfile() {
         );
     } else {
         const resData = await response.json();
-        console.log('Response data: ', resData);
         return resData;
     }
 }

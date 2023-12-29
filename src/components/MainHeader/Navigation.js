@@ -87,8 +87,8 @@ const Navigation = () => {
                             onClick={e => e.preventDefault()}
                             end
                         >
-                        { !profileUrl && <FaUser /> }
-                        { profileUrl && <img src={profileUrl} alt='profile' className={classes.dpImage} />}
+                        { (!profileUrl || 'null' === profileUrl) && <FaUser /> }
+                        { profileUrl && 'null' !== profileUrl && <img src={profileUrl} alt='profile' className={classes.dpImage} />}
                         </NavLink>
                         <ul>
                             <li>

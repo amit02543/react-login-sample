@@ -58,7 +58,6 @@ const Search = () => {
             { headers }
         )
         .then(res => {
-            console.log(res);
             setSearchData(res.data);
             setAlbumsData(res.data.albums);
             setArtistsData(res.data.artists);
@@ -87,7 +86,6 @@ const Search = () => {
 
     const typeChangeHandler = event => {
         setSelectedType(event.target.value);
-        console.log('Selected Value: ', event.target.value);
 
         setFormIsValid(
             enteredQuery.trim().length > 2
