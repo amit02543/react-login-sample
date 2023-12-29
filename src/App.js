@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import ErrorPage from './pages/Error';
@@ -54,6 +55,21 @@ const router = createBrowserRouter([
 
 
 function App() {
+
+    const darkMode = localStorage.getItem('spotify-mode');
+    const fontSize = localStorage.getItem('spotify-font-size');
+
+    const [isFontSize, setIsFontSize] = useState(fontSize);
+
+    const [isDarkMode, setIsDarkMode] = useState(darkMode);
+
+    useEffect(() => {
+        var bodyClasses = darkMode === 'true' ? 'dark' : '';
+        bodyClasses = bodyClasses + ' ' +  (fontSize ? isFontSize : 'fsNormal');
+
+        document.body.className = bodyClasses;
+    });
+    
     return <RouterProvider router={router} />;
 }
 

@@ -7,6 +7,7 @@ import classes from './Navigation.module.css';
 const Navigation = () => {
 
     const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const profileUrl = localStorage.getItem('profileUrl');
 
     useRouteLoaderData('root');
 
@@ -86,7 +87,8 @@ const Navigation = () => {
                             onClick={e => e.preventDefault()}
                             end
                         >
-                        <FaUser />
+                        { !profileUrl && <FaUser /> }
+                        { profileUrl && <img src={profileUrl} alt='profile' className={classes.dpImage} />}
                         </NavLink>
                         <ul>
                             <li>

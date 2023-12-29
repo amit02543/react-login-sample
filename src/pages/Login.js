@@ -13,7 +13,7 @@ function LoginPage() {
 export default LoginPage;
 
 
-export async function action({ request }) {  
+export async function action({ request }) {
   
     const data = await request.formData();  
 
@@ -46,6 +46,7 @@ export async function action({ request }) {
   
     localStorage.setItem('isLoggedIn', true);
     localStorage.setItem('user', resData.username);
+    localStorage.setItem('profileUrl', resData.profileUrl);
 
   
     return redirect('/');

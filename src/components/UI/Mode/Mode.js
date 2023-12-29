@@ -5,6 +5,7 @@ import classes from './Mode.module.css';
 const Mode = () => {
 
     const darkMode = localStorage.getItem('spotify-mode');
+    const fontSize = localStorage.getItem('spotify-font-size');
 
     const [isDarkMode, setIsDarkMode] = useState(darkMode);
     const [checkedValue, setCheckedValue] = useState(isDarkMode === 'true' ? true : false);
@@ -15,20 +16,25 @@ const Mode = () => {
 
         if(event.target.checked) {
             localStorage.setItem('spotify-mode', event.target.checked);
-            setCheckedValue(true);
-            document.body.className = 'dark';
+
+            var bodyClasses = fontSize ? fontSize : 'fsNormal';
+            bodyClasses = bodyClasses + ' ' +  event.target.value;
+            document.body.className = bodyClasses;
         } else {
             localStorage.removeItem('spotify-mode');
-            setCheckedValue(false);
-            document.body.className = '';
+            
+            document.body.className = fontSize ? fontSize : 'fsNormal';
         }
 
-        
+        setCheckedValue(event.target.checked);
     };
 
 
     useEffect(() => {
-        document.body.className = checkedValue ? 'dark' : '';
+        var bodyClasses = darkMode === 'true' ? 'dark' : '';
+        bodyClasses = bodyClasses + ' ' +  (fontSize ? fontSize : 'fsNormal');
+
+        document.body.className = bodyClasses;
     });
 
 

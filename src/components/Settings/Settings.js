@@ -3,6 +3,7 @@ import Card from "../UI/Card/Card";
 import Mode from "../UI/Mode/Mode";
 
 import classes from './Settings.module.css';
+import Style from "../UI/Style/Style";
 
 const Settings = () => {
     return (
@@ -15,10 +16,10 @@ const Settings = () => {
                     <span className={classes.optionText}>Dark</span>
                 </div>
             </div>
-            {/* <div className={classes.row}>
+            <div className={classes.row}>
                 <div className={classes.label}>Style</div>
-                <div className={classes.value}><Mode/></div>
-            </div> */}
+                <div className={classes.value}><Style /></div>
+            </div>
         </Card>
     );
 };

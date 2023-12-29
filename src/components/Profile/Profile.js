@@ -158,6 +158,7 @@ const Profile = ({ data }) => {
             setMessage(res.data.message);
             setEnteredProfileUrl(res.data.profileUrl);
             setIsFileSelector(false);
+            localStorage.setItem('profileUrl', res.data.profileUrl);
         })
         .catch(err => {
             console.log(err.response.data);
