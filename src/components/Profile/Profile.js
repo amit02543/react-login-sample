@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { json } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import axios from 'axios';
@@ -17,6 +18,7 @@ const Profile = ({ data }) => {
     const [enteredName, setEnteredName] = useState(data.name ? data.name : '');
     const [enteredPronoun, setEnteredPronoun] = useState(data.pronoun ? data.pronoun : '');
     const [enteredEmail, setEnteredEmail] = useState(data.email ? data.email : '');
+    const [imageSource, setImageSource] = useState();
     const [isFormEditable, setIsFormEditable] = useState(false);
     const [isFileSelector, setIsFileSelector] = useState(false);
     const [file, setFile] = useState('');
@@ -145,7 +147,7 @@ const Profile = ({ data }) => {
         formData.append('image', file);
 
         await axios.post(
-            `http://localhost:8080/profile/${username}/upload-image`, 
+            `http://localhost:8080/profile/${username}/upload-image-2`, 
             formData, 
             {
                 headers: {
@@ -161,6 +163,7 @@ const Profile = ({ data }) => {
             setEnteredProfileUrl(res.data.profileUrl);
             setIsFileSelector(false);
             localStorage.setItem('profileUrl', res.data.profileUrl);
+            window.location.reload(true);
         })
         .catch(err => {
             console.log(err.response.data);
@@ -175,6 +178,40 @@ const Profile = ({ data }) => {
     const onUploadCancelHandler = () => {
         setIsFileSelector(false);
     };
+
+
+    const loadProfileImage = async () => {
+
+        const username = localStorage.getItem('user');
+    
+        const response = await fetch(`http://localhost:8080/profile/${username}/profile-image`);
+      
+        
+        if (!response.ok) {
+            throw json(
+                { message: 'Could not fetch user profile image.' },
+                { status: 500 }
+            );
+        } 
+        
+
+        console.log(response);
+        
+        // const resData = await response.body;
+        const imageBlob = await response.blob();
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+
+        setImageSource(imageObjectURL);
+    };
+
+
+    useEffect(() => {
+
+        if(!imageSource) {
+            loadProfileImage();
+        }
+
+    }, [imageSource]);
 
 
     return (
@@ -199,8 +236,10 @@ const Profile = ({ data }) => {
 
             <div>
                 <div className={`${classes.w100} ${classes.profilePic}`}>
-                    { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
-                    { !enteredProfileUrl && <FaUser /> }
+                    {/* { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
+                    { !enteredProfileUrl && <FaUser /> } */}
+                    { imageSource && <img src={imageSource} alt="Profile Photo" /> }
+                    { !imageSource && <FaUser /> }
                     <span onClick={updateProfilePictureHandler}><b>Update</b></span>
                 </div>
             </div>
