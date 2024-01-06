@@ -1,0 +1,47 @@
+.trending {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.trending.list{
+    /* flex: 1; */
+}
+
+.trending.grid {
+    gap: 50px 50px;
+}
+
+.trending.grid img {
+    width: 230px;
+    height: 230px;
+    margin-right: 1rem;
+}
+
+.trending.grid>div {
+    width: 30%;
+    height: 250px;
+}
+
+.trending.column {
+    gap: 50px 50px;
+    align-items: stretch;
+}
+
+.trending.column>div {
+    width: 20%;
+    display: inline-block;
+    height: 450px;
+
+}
+
+.trending.column>div img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 1rem;
+}
+
+.trending.column>div>div {
+    width: 100%;
+    
+}
