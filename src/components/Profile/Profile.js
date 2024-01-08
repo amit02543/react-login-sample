@@ -238,7 +238,7 @@ const Profile = ({ data }) => {
                 <div className={`${classes.w100} ${classes.profilePic}`}>
                     {/* { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
                     { !enteredProfileUrl && <FaUser /> } */}
-                    { imageSource && <img src={imageSource} alt="Profile Photo" /> }
+                    { imageSource && <img src={imageSource} alt="Profile" /> }
                     { !imageSource && <FaUser /> }
                     <span onClick={updateProfilePictureHandler}><b>Update</b></span>
                 </div>

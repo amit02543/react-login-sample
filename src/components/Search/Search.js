@@ -105,7 +105,7 @@ const Search = () => {
     return (           
         <Card className={classes.search}>
             
-            { errorMessage && <p className={classes.error}>{errorMessage}</p> }
+            { errorMessage && <p style={ { color: 'red' } }>{errorMessage}</p> }
 
             <form onSubmit={submitHandler}>
                 {/* <div className={`${classes.control} ${classes.w70} ${classes.floatLeft}`}>

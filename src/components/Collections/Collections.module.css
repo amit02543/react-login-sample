@@ -1,0 +1,73 @@
+.collections form {
+    padding-top: 2rem;
+}
+
+.collections .row {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.collections input {
+    padding: 8px 12px;
+}
+
+.collections .btnSecondary {
+    margin-left: 2rem;
+}
+
+.collections form .btnSecondary {
+    background-color: grey;
+}
+
+.collections form .btnSecondary:disabled {
+    background: var(--button-disable-bg);
+    border-color: var(--button-disable-bg);
+    color: var(--button-disable-color);
+    cursor: not-allowed;
+}
+
+.collection-sort {
+    display: flex;
+    justify-content: end;
+    margin-right: 2rem;
+}
+
+.collection-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.collection img {
+    width: 250px;
+    height: 250px;
+    border-radius: 6px;
+}
+
+.collection .noimage {
+    float: left;
+    width: 250px;
+    height: 250px;
+    border-radius: 6px;
+    border: 1px solid #f9c762;
+    padding: 2rem 1rem 0;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.collection-wrapper .collection div {
+    flex-shrink: 0;
+}
+
+.collection-wrapper .collection p {
+    text-align: left;
+    font-size: 12px;
+}
+
+.collection-wrapper .collection p:last-child {
+    margin-bottom: 2rem;
+}

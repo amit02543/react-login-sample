@@ -25,6 +25,41 @@ const Navigation = () => {
                         Home
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink
+                        to="/search"
+                        className={({ isActive }) =>
+                            isActive ? classes.active : undefined
+                        }
+                        end
+                    >
+                    Search
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to="/new-music"
+                        className={({ isActive }) =>
+                            isActive ? classes.active : undefined
+                        }
+                        end
+                    >
+                    New Music
+                    </NavLink>
+                </li>
+                {isLoggedIn && (
+                    <li>
+                        <NavLink
+                            to="/collections"
+                            className={({ isActive }) =>
+                                isActive ? classes.active : undefined
+                            }
+                            end
+                        >
+                        Collections
+                        </NavLink>
+                    </li>
+                )}
                 {!isLoggedIn && (
                     <li>
                         <NavLink
@@ -48,19 +83,6 @@ const Navigation = () => {
                             end
                         >
                         Register
-                        </NavLink>
-                    </li>
-                )}
-                {isLoggedIn && (
-                    <li>
-                        <NavLink
-                            to="/search"
-                            className={({ isActive }) =>
-                                isActive ? classes.active : undefined
-                            }
-                            end
-                        >
-                        Search
                         </NavLink>
                     </li>
                 )}

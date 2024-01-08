@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import ErrorPage from './pages/Error';
-import HomePage from './pages/Home';
+import HomePage, { loader as randomMusicLoader } from './pages/Home';
 import RootLayout from './pages/Root';
 import LoginPage, { action as loginAction } from './pages/Login';
 import ProfilePage, { loader as profileLoader } from './pages/Profile';
@@ -10,6 +10,8 @@ import RegisterPage from './pages/Register';
 import { action as logoutAction } from './pages/Logout';
 import SearchPage from './pages/Search';
 import SettingsPage from './pages/Settings';
+import NewMusicPage, { loader as latestMusicLoader} from './pages/NewMusic';
+import CollectionsPage, { loader as collectionMusicLoader } from './pages/Collections';
 
 
 const router = createBrowserRouter([
@@ -21,7 +23,8 @@ const router = createBrowserRouter([
     children: [
       { 
         index: true, 
-        element: <HomePage /> 
+        element: <HomePage />,
+        loader: randomMusicLoader 
       },
       {
         path: 'login',
@@ -35,6 +38,16 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <SearchPage />
+      },
+      {
+        path: 'new-music',
+        element: <NewMusicPage />,
+        loader: latestMusicLoader
+      },
+      {
+        path: 'collections',
+        element: <CollectionsPage />,
+        loader: collectionMusicLoader
       },
       {
         path: 'profile',

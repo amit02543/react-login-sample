@@ -116,7 +116,7 @@
     background-color: var(--itemlist-bg);    
 }
 
-img {
+.search img, .wrapper img {
     width: 120px;
     height: 120px;
     float: left;
