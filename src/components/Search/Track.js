@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
@@ -7,14 +7,26 @@ import { BsCollectionPlayFill, BsHandThumbsUpFill } from "react-icons/bs";
 
 import classes from './Search.module.css';
 
-const Track = ({ track }) => {
+const Track = ({ track, collections }) => {
+
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [selectedType, setSelectedType] = useState("");
+
+    const username = localStorage.getItem('user');
+
+
+
+    const collectionOptions = collections && collections.map(collection => {
+        return <option key={collection.id} value={collection.id}>{collection.name}</option>
+    });
+
+    // const updatedCollectionOptions = { <option key={collection.id} value={collection.id}>{collection.name}</option>, ...collectionOptions }
 
     const artists = track.artists.map(artist => <li key={artist}>{artist}</li>);
 
 
     const onLikeClickHandler = async (track) => {
-        const username = localStorage.getItem('user');
-
+        
         const headers = { 
             'Content-Type': 'application/json'
         };
@@ -39,14 +51,9 @@ const Track = ({ track }) => {
         )
         .then(res => {
             console.log(res);
-            // setErrorMessage('');
-            // setIsSubmitting(false);
-            // setMessage(res.data.message);
         })
         .catch(err => {
             console.log(err.response.data);
-            // setErrorMessage(err.response.data.message);
-            // setIsSubmitting(false);
         });
 
     };
@@ -54,8 +61,14 @@ const Track = ({ track }) => {
 
     const onAddCollectionClickHandler = event => {
         event.preventDefault();
-        console.log('Add to collection: ', event.target.value);
-    }
+        setIsDisabled(false);
+    };
+
+
+    const collectionChangeHandler = event => {
+        setSelectedType(event.target.value);
+        setIsDisabled(true);
+    };
 
 
     return (
@@ -75,16 +88,30 @@ const Track = ({ track }) => {
                     <FaDiamond />
                     <span><b>Popularity: </b>{track.popularity}</span>
                 </p>
-                <div className={classes.trackActions}>
-                    <span>
-                        <abbr title="Like song"><BsHandThumbsUpFill onClick={() => onLikeClickHandler(track)} /></abbr>
-                    </span>
-                    <span style={{width: '50px'}}></span>
-                    <span>
-                        <abbr title="Add track to collection"><BsCollectionPlayFill onClick={onAddCollectionClickHandler} /></abbr>
-                    </span>
-                    
-                </div>
+                { collections && 
+                    <div className={classes.trackActions}>
+                        <span>
+                            <abbr title="Like song">
+                                <BsHandThumbsUpFill onClick={() => onLikeClickHandler(track)} />
+                            </abbr>
+                        </span>
+                        <span style={{width: '50px'}}></span>
+                        <span>
+                            <abbr title="Add track to collection"><BsCollectionPlayFill onClick={onAddCollectionClickHandler} /></abbr>
+                        </span>
+                        <span>
+                            <select 
+                                name='collection'
+                                id={track.id}
+                                value={selectedType}
+                                onChange={collectionChangeHandler}
+                                disabled={isDisabled}
+                            >
+                                {collectionOptions}
+                            </select>
+                        </span>
+                    </div> 
+                }
             </div>
             
         </div>

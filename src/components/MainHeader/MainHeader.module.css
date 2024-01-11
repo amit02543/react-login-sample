@@ -11,6 +11,7 @@
     /* background: var(--primary-color); */
     background-color: var(--header-color);
     padding: 0 2rem;
+    z-index: 999999;
 }
 
 .main-header h1 {

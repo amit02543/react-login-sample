@@ -14,8 +14,8 @@ function NewMusicPage() {
             <Await resolve={ latestMusic }>
                 {
                     response => (
-                        <PageContent title="Latest Trends">
-                            <p>Find all latest trending music here</p>
+                        <PageContent title="Latest Trending Albums">
+                            <p>Find all latest trending music albums here</p>
                             <NewMusic data={response} />
                         </PageContent>
                     )

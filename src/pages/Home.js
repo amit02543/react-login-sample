@@ -30,6 +30,8 @@ export default HomePage;
 
 async function loadRandomMusic() {
 
+    const username = localStorage.getItem('user');
+
     const response = await fetch('http://localhost:8080/spotify/random');
 
     if(!response.ok) {
@@ -39,9 +41,21 @@ async function loadRandomMusic() {
         );
     } 
     
-    const resData = await response.json();
+    const randomData = await response.json();
 
-    return resData.tracks;
+    
+    const collectionResponse = await fetch(`http://localhost:8080/user/${username}/collections`);
+
+    if(!collectionResponse.ok) {
+        throw json(
+            { message: 'Could not fetch user collections name.'},
+            { status: 500 }
+        );
+    } 
+    
+    const collectionData = await collectionResponse.json();
+
+    return { tracks: randomData.tracks, collections: collectionData };
 };
 
 

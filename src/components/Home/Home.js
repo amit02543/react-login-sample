@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 
-import Card from '../UI/Card/Card';
-import Track from '../Search/Track';
+import axios from "axios";
 
-import classes from './Home.module.css';
+import Card from "../UI/Card/Card";
+import Track from "../Search/Track";
+
+import classes from "./Home.module.css";
 
 const Home = ({ data }) => {
 
-  const tracks = data.map(track => <Track track={track} key={track.id} /> );
+    const [userCollections, setUserCollections] = useState(data.collections);
 
-  return (
-    <Card className={classes.home}>
-      <div>{tracks}</div>
-    </Card>
-  );
+    const tracks = data.tracks.map((track) => <Track track={track} key={track.id} collections={userCollections} />);
+
+    
+
+    return (
+        <Card className={classes.home}>
+            <div>{tracks}</div>
+        </Card>
+    );
 };
 
 export default Home;

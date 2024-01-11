@@ -22,7 +22,6 @@ const NewMusic = ({ data }) => {
     const viewChangeHandler = (event) => {
 
         localStorage.setItem('view-type', event.target.value);
-        console.log(event.target.value);
 
         setCheckedValue(event.target.value);
     };
@@ -40,20 +39,6 @@ const NewMusic = ({ data }) => {
     return (
         <>
             <View checkedValue={checkedValue} onChange={viewChangeHandler} />
-            {/* <div className='icons radioGroup' onChange={viewChangeHandler}>
-                <div className='list'>
-                    <input type="radio" id="view-list" name="selector" value="list" checked={checkedValue === 'list'} />
-                    <label htmlFor="view-list"><MdViewList /></label>
-                </div>
-                <div className='grid'>
-                    <input type="radio" id="view-grid" name="selector" value="grid" checked={checkedValue === 'grid'}/>
-                    <label htmlFor="view-grid"><MdViewModule /></label>
-                </div>
-                <div className='column'>
-                    <input type="radio" id="view-column" name="selector" value="column" checked={checkedValue === 'column'} />
-                    <label htmlFor="view-column"><MdViewWeek /></label>
-                </div>
-            </div> */}
             <Card className='trending'>
                 {albums}
             </Card>
