@@ -12,6 +12,7 @@ import SearchPage from './pages/Search';
 import SettingsPage from './pages/Settings';
 import NewMusicPage, { loader as latestMusicLoader} from './pages/NewMusic';
 import CollectionsPage, { loader as collectionMusicLoader } from './pages/Collections';
+import LikesPage, { loader as likesMusicLoader } from './pages/Likes';
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
         path: 'collections',
         element: <CollectionsPage />,
         loader: collectionMusicLoader
+      },
+      {
+        path: 'likes',
+        element: <LikesPage />,
+        loader: likesMusicLoader
       },
       {
         path: 'profile',

@@ -115,6 +115,17 @@ const Navigation = () => {
                         <ul>
                             <li>
                                 <NavLink
+                                    to="/likes"
+                                    className={({ isActive }) =>
+                                        isActive ? classes.active : undefined
+                                    }
+                                    end
+                                >
+                                Your Music
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/profile"
                                     className={({ isActive }) =>
                                         isActive ? classes.active : undefined

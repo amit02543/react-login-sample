@@ -40,7 +40,6 @@ async function loadRandomMusic() {
     } 
     
     const resData = await response.json();
-    console.log(resData.tracks)
 
     return resData.tracks;
 };

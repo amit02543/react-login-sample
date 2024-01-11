@@ -72,3 +72,13 @@ svg {
 .small {
     font-size: 12px;
 } */
+
+.trackActions {
+    /* some css will come for formatting div */
+}
+
+.trackActions svg {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}

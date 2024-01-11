@@ -1,0 +1,7 @@
+.likes {
+    padding-top: 1rem;
+}
+
+.likes svg {
+    visibility: hidden;
+}

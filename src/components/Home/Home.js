@@ -7,14 +7,10 @@ import classes from './Home.module.css';
 
 const Home = ({ data }) => {
 
-  const user = localStorage.getItem('user');
-  console.log('Home random music: ', data);
-
-  const tracks = data.map(track => <Track track={track} /> );
+  const tracks = data.map(track => <Track track={track} key={track.id} /> );
 
   return (
     <Card className={classes.home}>
-      {/* <h1>Welcome{user && ` back ${user}`}!</h1> */}
       <div>{tracks}</div>
     </Card>
   );

@@ -147,7 +147,7 @@ const Profile = ({ data }) => {
         formData.append('image', file);
 
         await axios.post(
-            `http://localhost:8080/profile/${username}/upload-image-2`, 
+            `http://localhost:8080/profile/${username}/upload-image`, 
             formData, 
             {
                 headers: {
@@ -236,10 +236,10 @@ const Profile = ({ data }) => {
 
             <div>
                 <div className={`${classes.w100} ${classes.profilePic}`}>
-                    {/* { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
-                    { !enteredProfileUrl && <FaUser /> } */}
-                    { imageSource && <img src={imageSource} alt="Profile" /> }
-                    { !imageSource && <FaUser /> }
+                    { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
+                    { !enteredProfileUrl && <FaUser /> }
+                    {/* { imageSource && <img src={imageSource} alt="Profile" /> }
+                    { !imageSource && <FaUser /> } */}
                     <span onClick={updateProfilePictureHandler}><b>Update</b></span>
                 </div>
             </div>
