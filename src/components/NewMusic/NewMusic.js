@@ -15,7 +15,9 @@ const NewMusic = ({ data }) => {
 
     const [checkedValue, setCheckedValue] = useState(viewType ? viewType : 'list');
 
-    const albums = data.albums.map(album => <Album album={album} key={album.id} /> );
+    const [userCollections, setUserCollections] = useState(data.collections);
+
+    const albums = data.albums.map(album => <Album album={album} key={album.id} collections={userCollections} /> );
 
     
     

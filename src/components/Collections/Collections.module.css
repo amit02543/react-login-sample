@@ -39,7 +39,19 @@
     align-items: stretch;
     align-content: center;
     gap: 3rem;
-    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 5rem;
+}
+
+.collection {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.collection a {
+    text-decoration: none;
+    color: var(--font-color);
 }
 
 .collection img {
@@ -68,6 +80,6 @@
     font-size: 12px;
 }
 
-.collection-wrapper .collection p:last-child {
+/* .collection-wrapper .collection p:last-child {
     margin-bottom: 2rem;
-}
+} */

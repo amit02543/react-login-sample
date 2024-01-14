@@ -29,6 +29,8 @@ export default NewMusicPage;
 
 
 async function loadLatestMusic() {
+
+    const username = localStorage.getItem('user');
     
     const response = await fetch('http://localhost:8080/spotify/latest');
 
@@ -39,9 +41,21 @@ async function loadLatestMusic() {
         );
     }
 
-    const resData = await response.json();
+    const latestAlbumData = await response.json();
 
-    return resData;
+
+    const collectionResponse = await fetch(`http://localhost:8080/user/${username}/collections`);
+
+    if(!collectionResponse.ok) {
+        throw json(
+            { message: 'Could not fetch user collections name.'},
+            { status: 500 }
+        );
+    } 
+
+    const collectionData = await collectionResponse.json();
+
+    return { albums: latestAlbumData.albums, collections: collectionData };
 };
 
 

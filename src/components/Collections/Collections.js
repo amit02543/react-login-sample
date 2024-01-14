@@ -7,6 +7,7 @@ import Input from "../UI/Input/Input";
 
 import classes from './Collections.module.css';
 import Select from "../UI/Input/Select";
+import { Link } from "react-router-dom";
 
 
 const Collections = ({ data }) => {
@@ -84,13 +85,10 @@ const Collections = ({ data }) => {
         let data = collectionData;
 
         if(field === 'name') {
-            // sortByName(order);
             data = collectionData.sort(sortByName(order));
         } else if(field === 'created') {
-            // sortByDate('createdDate', order);
             data = collectionData.sort(sortByDate('createdDate', order));
         } else if(field === 'updated') {
-            // sortByDate('lastUpdatedDate', order);
             data = collectionData.sort(sortByDate('lastUpdatedDate', order));
         }
 
@@ -106,13 +104,15 @@ const Collections = ({ data }) => {
 
         return (
             <div className={classes.collection} key={collection.id}>
-                { collection.imageUrl && <img src={collection.imageUrl} alt="Collection" /> }
-                { !collection.imageUrl && <div className={classes.noimage}>No Image Found</div> }
-                <div>
-                    <h4>{collection.name}</h4>
-                    <p><b>Created Date: </b> {createdDate}</p>
-                    <p><b>Last Updated Date: </b> {updatedDate}</p>
-                </div>
+                <Link to={`/collections/${collection.name}`}>
+                    { collection.imageUrl && <img src={collection.imageUrl} alt="Collection" /> }
+                    { !collection.imageUrl && <div className={classes.noimage}>No Image Found</div> }
+                    <div>
+                        <h4>{collection.name}</h4>
+                        <p><b>Created Date: </b> {createdDate}</p>
+                        <p><b>Last Updated Date: </b> {updatedDate}</p>
+                    </div>
+                </Link>
             </div>
         );
     });

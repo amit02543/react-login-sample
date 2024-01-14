@@ -59,6 +59,7 @@ body {
   --bg-color: var(--body-background-light);
   /* height: 100vw; */
   color: var(--font-color-light);
+  --font-color: var(--font-color-light);
   --primary-color: var(--light);
   --header-color: var(--header-color-light);
   --card-bg: var(--card-background-light);
@@ -83,6 +84,7 @@ body.dark {
   background-color: var(--body-background-dark);
   --bg-color: var(--body-background-dark);
   color: var(--font-color-dark);
+  --font-color: var(--font-color-dark);
   --header-color: var(--header-color-dark);
   --primary-color: #2B2B2B;
   --card-bg: var(--card-background-dark);

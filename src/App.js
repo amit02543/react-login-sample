@@ -13,6 +13,7 @@ import SettingsPage from './pages/Settings';
 import NewMusicPage, { loader as latestMusicLoader} from './pages/NewMusic';
 import CollectionsPage, { loader as collectionMusicLoader } from './pages/Collections';
 import LikesPage, { loader as likesMusicLoader } from './pages/Likes';
+import CollectionDetailsPage, { loader as CollectionDetailsLoader } from './pages/CollectionDetails';
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
         loader: collectionMusicLoader
       },
       {
+        path: 'collections/:collectionName',
+        element: <CollectionDetailsPage />,
+        loader: CollectionDetailsLoader
+      },
+      {
         path: 'likes',
         element: <LikesPage />,
         loader: likesMusicLoader
@@ -78,13 +84,9 @@ function App() {
     const darkMode = localStorage.getItem('spotify-mode');
     const fontSize = localStorage.getItem('spotify-font-size');
 
-    const [isFontSize, setIsFontSize] = useState(fontSize);
-
-    const [isDarkMode, setIsDarkMode] = useState(darkMode);
-
     useEffect(() => {
         var bodyClasses = darkMode === 'true' ? 'dark' : '';
-        bodyClasses = bodyClasses + ' ' +  (fontSize ? isFontSize : 'fsNormal');
+        bodyClasses = bodyClasses + ' ' +  (fontSize ? fontSize : 'fsNormal');
 
         document.body.className = bodyClasses;
     });

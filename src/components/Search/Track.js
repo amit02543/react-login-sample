@@ -17,10 +17,11 @@ const Track = ({ track, collections }) => {
 
 
     const collectionOptions = collections && collections.map(collection => {
-        return <option key={collection.id} value={collection.id}>{collection.name}</option>
+        return <option key={collection.id} value={collection.name}>{collection.name}</option>
     });
 
-    // const updatedCollectionOptions = { <option key={collection.id} value={collection.id}>{collection.name}</option>, ...collectionOptions }
+    collectionOptions && collectionOptions.unshift(<option key="" value="" disabled={true}>  -- Collection --  </option>);
+
 
     const artists = track.artists.map(artist => <li key={artist}>{artist}</li>);
 
@@ -65,8 +66,43 @@ const Track = ({ track, collections }) => {
     };
 
 
-    const collectionChangeHandler = event => {
+    const collectionChangeHandler = async event => {
         setSelectedType(event.target.value);
+        console.log(track);
+
+        const headers = { 
+            'Content-Type': 'application/json'
+        };
+
+
+        const requestBody = {
+            username: username,
+            name: event.target.value,
+            type: 'song', 
+            spotifyId: track.id,
+            title: track.title,
+            artists: track.artists,
+            album: track.album,
+            duration: track.duration,
+            popularity: track.popularity,
+            imageUrl: track.imageUrl,
+            releaseDate: track.releaseDate,
+            totalTracks: 0
+        };
+
+        
+        await axios.post(
+            `http://localhost:8080/collections`, 
+            JSON.stringify(requestBody),
+            { headers }
+        )
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err.response.data);
+        });
+
         setIsDisabled(true);
     };
 
