@@ -1,0 +1,9 @@
+.collectionDetail {
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.collectionDetail h3 {
+    text-decoration: underline;
+}

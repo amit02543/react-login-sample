@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { MdEdit } from "react-icons/md";
 import axios from "axios";
 
 import Button from "../UI/Button/Button";
@@ -7,7 +9,6 @@ import Input from "../UI/Input/Input";
 
 import classes from './Collections.module.css';
 import Select from "../UI/Input/Select";
-import { Link } from "react-router-dom";
 
 
 const Collections = ({ data }) => {
@@ -104,6 +105,7 @@ const Collections = ({ data }) => {
 
         return (
             <div className={classes.collection} key={collection.id}>
+                <Link to={`/collections/${collection.name}/edit`}><MdEdit /></Link>
                 <Link to={`/collections/${collection.name}`}>
                     { collection.imageUrl && <img src={collection.imageUrl} alt="Collection" /> }
                     { !collection.imageUrl && <div className={classes.noimage}>No Image Found</div> }

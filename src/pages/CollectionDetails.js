@@ -13,9 +13,9 @@ function CollectionDetailsPage() {
             <Await resolve={collectionMusicByName}>
                 {
                     response => (
-                        <PageContent title="Your Collections!">
-                            {/* <p>Browse all your music collection!</p> */}
-                            <CollectionDetails data={response} />
+                        <PageContent title={response.name}>
+                            <p>You can view or updte your music collection here!</p>
+                            <CollectionDetails data={response.data} />
                         </PageContent>
                     )
                 }
@@ -41,9 +41,10 @@ async function loadUserCollectionMusicByName(collectionName) {
     }
 
 
-    const resData = response.json();
+    const resData = await response.json();
 
-    return resData;
+    return { name: collectionName, data: resData };
+    // return resData;
 }
 
 

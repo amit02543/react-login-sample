@@ -4,11 +4,11 @@ import Album from "../Search/Album";
 import Track from "../Search/Track";
 
 import classes from './CollectionDetails.module.css';
+import Card from "../UI/Card/Card";
 
 const CollectionDetails = ({ data }) => {
     
     const [collectionData, setCollectionData] = useState(data);
-
 
     const albums = collectionData
         .filter(collection => collection.type === 'album')
@@ -21,15 +21,29 @@ const CollectionDetails = ({ data }) => {
 
 
     return (
-        <>
-            <h2>Albums</h2>
-            <div>{albums}</div>
+        <Card className={classes.collectionDetail}>
+            { collectionData.length === 0 && <h2>No album or song added for this collection yet.</h2> }
 
-            <hr />
+            { collectionData.length > 0 && 
+                <>
+                    { albums.length > 0 && 
+                        <>
+                            <h3>Albums</h3>
+                            <div>{albums}</div>
+                        </>
+                    }
 
-            <h2>Songs</h2>
-            <div>{songs}</div>
-        </>
+                    { albums.length > 0 && songs.length > 0 && <hr />}
+
+                    { songs.length > 0 && 
+                        <>
+                            <h3>Songs</h3>
+                            <div>{songs}</div>
+                        </>
+                    }
+                </>
+            }
+        </Card>
     )
 };
 

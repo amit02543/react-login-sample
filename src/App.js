@@ -13,7 +13,8 @@ import SettingsPage from './pages/Settings';
 import NewMusicPage, { loader as latestMusicLoader} from './pages/NewMusic';
 import CollectionsPage, { loader as collectionMusicLoader } from './pages/Collections';
 import LikesPage, { loader as likesMusicLoader } from './pages/Likes';
-import CollectionDetailsPage, { loader as CollectionDetailsLoader } from './pages/CollectionDetails';
+import CollectionDetailsPage, { loader as CollectionMusicDetailsLoader } from './pages/CollectionDetails';
+import CollectionEditPage, { loader as CollectionDetailsLoader } from './pages/CollectionEdit';
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
       {
         path: 'collections/:collectionName',
         element: <CollectionDetailsPage />,
+        loader: CollectionMusicDetailsLoader
+      },
+      {
+        path: 'collections/:collectionName/edit',
+        element: <CollectionEditPage/>,
         loader: CollectionDetailsLoader
       },
       {
