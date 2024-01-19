@@ -1,12 +1,10 @@
-import React from "react";
-
 import { Slide, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-const Toast = ({ type, message }) => {
+const Toast = (type, message) => {
 
-    const successToast =  toast.success(message, {
+    const options = {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: true,
@@ -16,67 +14,27 @@ const Toast = ({ type, message }) => {
         progress: undefined,
         theme: "dark",
         transition: Slide
-    });
+    };
 
 
-    const errorToast =  toast.error(message, {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide
-    });
+    switch(type) {
+        
+        case 'success': 
+            return toast.success(message, options);
 
+        case 'error': 
+            return toast.error(message, options);
 
-    const infoToast =  toast.info(message, {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide
-    });
+        case 'info': 
+            return toast.info(message, options);
 
+        case 'warning': 
+            return toast.warn(message, options);
 
-    const defaultToast =  toast(message, {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide
-    });
-
-
-    const toastType = defaultToast;
-
-    if(type === 'success') {
-        console.log('in success toast');
-        toastType = successToast;
-    } 
-
-    if(type === 'error') {
-        console.log('in error toast');
-        toastType = errorToast;
+        default: 
+            return toast(message, options);
     }
 
-    if(type === 'info') {
-        console.log('in info toast');
-        toastType = infoToast
-    }
-
-
-    return {toastType};
 }
 
 export default Toast;
