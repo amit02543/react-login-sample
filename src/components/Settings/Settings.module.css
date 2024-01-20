@@ -5,29 +5,35 @@
     padding: 2rem;
 }
 
-.row {
+.settings .row {
     margin: 1rem 0;
     display: flex;
     align-items: center;
     /* flex-direction: column; */
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
 }
 
-.row .label,
-.row .value {
+.settings .row:last-child {
+border-bottom: none;
+}
+
+.settings .row .label,
+.settings .row .value {
     display: block;
 }
 
-.row .label {
+.settings .row .label {
     flex: 1;
     font-weight: bold;
 }
 
-.row .value {
+.settings .row .value {
     flex: 3;
     padding: 0.35rem 0.35rem;
 }
 
-.optionText {
+.settings .optionText {
     font-size: 12px;
     font-weight: bold;
     padding: 0 0.75rem;

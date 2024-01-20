@@ -34,15 +34,15 @@ const Style = () => {
     return (
         <div className={classes.radioGroup} onChange={fontSizeHandler}>
             <div className={classes.small}>
-                <input type="radio" id="option-one" name="selector" value="fsSmall" checked={checkedValue === 'fsSmall'} />
+                <input type="radio" id="option-one" name="selector" value="fsSmall" defaultChecked={checkedValue === 'fsSmall'} />
                 <label htmlFor="option-one">A-</label>
             </div>
             <div className={classes.normal}>
-                <input type="radio" id="option-two" name="selector" value="fsNormal" checked={checkedValue === 'fsNormal'}/>
+                <input type="radio" id="option-two" name="selector" value="fsNormal" defaultChecked={checkedValue === 'fsNormal'}/>
                 <label htmlFor="option-two">A</label>
             </div>
             <div className={classes.big}>
-                <input type="radio" id="option-three" name="selector" value="fsBig" checked={checkedValue === 'fsBig'} />
+                <input type="radio" id="option-three" name="selector" value="fsBig" defaultChecked={checkedValue === 'fsBig'} />
                 <label htmlFor="option-three" className={classes.big}>A+</label>
             </div>
         </div>

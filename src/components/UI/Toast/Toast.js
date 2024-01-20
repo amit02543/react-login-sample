@@ -4,8 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Toast = (type, message) => {
 
+    const toastPosition = localStorage.getItem('spotify-toast-position');
+
     const options = {
-        position: "bottom-center",
+        position: toastPosition || "bottom-center",
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -15,7 +17,7 @@ const Toast = (type, message) => {
         theme: "dark",
         transition: Slide
     };
-
+    
 
     switch(type) {
         

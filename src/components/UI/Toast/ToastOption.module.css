@@ -1,0 +1,22 @@
+.toastGroup {
+    display: flex;
+    align-items: left;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+}
+
+.toastGroup .toastOption {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    flex: 0 0 33.333333%;
+}
+
+.toastGroup .toastOption input[type="radio"] {
+    display: none;
+}
+
+.toastGroup .toastOption input[type="radio"]:checked+label {
+    font-weight: bold;
+    color: var(--active);
+}
