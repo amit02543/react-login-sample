@@ -1,0 +1,11 @@
+.like-btn:hover {
+    background: var(--itemlist-bg);
+    cursor: pointer;
+}
+
+.like-btn svg {
+    color: var(--color);
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align: -webkit-baseline-middle;
+}

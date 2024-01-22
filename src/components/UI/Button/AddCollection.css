@@ -1,0 +1,24 @@
+.add-collection:hover {
+    background: none;
+}
+
+.add-collection svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align: -webkit-baseline-middle;
+    cursor: pointer;
+    color: var(--color);
+}
+
+.add-collection select {
+    margin-left: 2rem;
+    padding: 0.25rem 1.5rem;
+    border-radius: 0.25rem;
+    vertical-align: -webkit-baseline-middle;
+    border-width: 1px;
+}
+
+.grid .add-collection select {
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+}
