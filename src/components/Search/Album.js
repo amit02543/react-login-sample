@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-import { BsCollectionPlayFill, BsHandThumbsUpFill } from "react-icons/bs";
-import { FaDiamond } from "react-icons/fa6";
+import './Album.css';
 
-import classes from './Search.module.css';
 
 const Album = ({ album, collections }) => {
 
@@ -111,21 +109,23 @@ const Album = ({ album, collections }) => {
 
 
     return (
-        <div className={classes.wrapper} key={album.id}>
+        <div className='album' key={album.id}>
             { album.imageUrl && <img src={album.imageUrl} alt="album" width="100" height="100" /> }
             
-            { !album.imageUrl && <div className={classes.noimage}>No Image Found</div> }
+            { !album.imageUrl && <div className='noimage'>No Image Found</div> }
 
             <div className=''>
                 <h4>{album.name}</h4>
-                <ul className={classes.itemlist}>{artists}</ul>
-                <p>
-                    <span><b>Release Date: </b>{album.releaseDate}</span>
+                <ul className='itemlist'>{artists}</ul>
+                <p className='small'><b>Release Date: </b>{album.releaseDate}</p>
+                <p className='small'><b>Tracks: </b>{album.totalTracks}</p>
+                {/* <p>
+                    <span></span>
                     <FaDiamond />
-                    <span><b>Tracks: </b>{album.totalTracks}</span>
-                </p>
+                    <span></span>
+                </p> */}
             </div>
-            {   collections && 
+            {/* {   collections && 
                     <div className={classes.trackActions}>
                         <span>
                             <abbr title="Like song">
@@ -148,7 +148,7 @@ const Album = ({ album, collections }) => {
                             </select>
                         </span>
                     </div> 
-            }
+            } */}
         </div>
     );
 };

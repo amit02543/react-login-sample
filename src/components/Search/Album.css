@@ -1,0 +1,63 @@
+.album {
+    display: flex;
+    width: 100%;
+    padding: 1rem 1rem 0.5rem 1rem;
+    text-align: left;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+.album img {
+    width: 8rem;
+    height: 8rem;
+    float: left;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+}
+
+.album .itemlist {
+    padding-left: 0;
+}
+
+.album .itemlist li {
+    display: inline;
+}
+
+.album .itemlist li:before {
+    content: " | "
+}
+
+.album .itemlist li:first-child:before {
+    content: ""
+}
+
+.grid .album {
+    height: 10rem;
+}
+
+.grid .album img {
+    width: 14rem;
+    height: 13.5rem;
+    margin-right: 1rem;
+}
+
+.grid .album h4,
+.grid .album .itemlist {
+    width: 14rem;
+}
+
+.column .album img {
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 1.5rem;
+    margin-right: 0;
+}
+
+.column .album h4,
+.column .album .itemlist {
+    width: 20rem;
+}
+
+.small {
+    font-size: 14px;
+}
