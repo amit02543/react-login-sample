@@ -5,7 +5,8 @@ import axios from "axios";
 import { FaDiamond } from "react-icons/fa6";
 import { BsCollectionPlayFill, BsHandThumbsUpFill } from "react-icons/bs";
 
-import classes from './Search.module.css';
+// import classes from './Search.module.css';
+import './Track.css';
 
 const Track = ({ track, collections }) => {
 
@@ -108,23 +109,26 @@ const Track = ({ track, collections }) => {
 
 
     return (
-        <div className={classes.wrapper} key={track.id}>
+        <div className='track' key={track.id}>
             { track.imageUrl && <img src={track.imageUrl} alt="track" width="100" height="100" /> }
             
-            { !track.imageUrl && <div className={classes.noimage}>No Image Found</div> }
+            { !track.imageUrl && <div className='noimage'>No Image Found</div> }
 
-            <div className=''>
+            <div className='track-details'>
                 <h4>{track.title}</h4>
-                <p className={classes.small}>{track.album}</p>
-                <ul className={classes.itemlist}>{artists}</ul>
-                <p>
+                <p className='small'><b>Album: </b>{track.album}</p>
+                <ul className='itemlist'>{artists}</ul>
+                <p className='small'><b>Release Date: </b>{track.releaseDate}</p>
+                <p className='small'><b>Duration: </b>{track.duration}</p>
+                <p className='small'><b>Popularity: </b>{track.popularity}</p>
+                {/* <p>
                     <span><b>Release Date: </b>{track.releaseDate}</span>
                     <FaDiamond />
                     <span><b>Duration: </b>{track.duration}</span>
                     <FaDiamond />
                     <span><b>Popularity: </b>{track.popularity}</span>
-                </p>
-                { collections && 
+                </p> */}
+                {/* { collections && 
                     <div className={classes.trackActions}>
                         <span>
                             <abbr title="Like song">
@@ -147,7 +151,7 @@ const Track = ({ track, collections }) => {
                             </select>
                         </span>
                     </div> 
-                }
+                } */}
             </div>
             
         </div>

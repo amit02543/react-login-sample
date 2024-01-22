@@ -1,0 +1,65 @@
+.track {
+    display: flex;
+    width: 100%;
+    padding: 1rem 1rem 0.5rem 1rem;
+    text-align: left;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+.track img {
+    width: 8rem;
+    height: 8rem;
+    /* float: left; */
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+}
+
+.track .itemlist {
+    padding-left: 0;
+}
+
+.track .itemlist li {
+    display: inline;
+}
+
+.track .itemlist li:before {
+    content: " | "
+}
+
+.track .itemlist li:first-child:before {
+    content: ""
+}
+
+/* .grid .track {
+    height: 10rem;
+} */
+
+.grid .track img {
+    width: 14rem;
+    height: 13.5rem;
+    margin-right: 1rem;
+}
+
+.grid .track h4,
+.grid .track p,
+.grid .track .itemlist {
+    width: 14rem;
+}
+
+.column .track img {
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 1.5rem;
+    margin-right: 0;
+}
+
+.column .track h4,
+.column .track p,
+.column .track .itemlist {
+    width: 20rem;
+}
+
+.small {
+    font-size: 12px;
+}
