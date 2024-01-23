@@ -12,8 +12,17 @@ const MusicAction = props => {
     return (
         // <div className={classes.musicAction}>
         <div className='music-actions'>
-            <LikeButton />
-            <AddCollection track={props.track} />
+            <LikeButton 
+                // onLike={props.onLike} 
+                track={props.data}
+            />
+            <AddCollection 
+                track={props.data} 
+                // isDisabled={props.isDisabled} 
+                // onAddCollection={props.onAddCollection}
+                collections={props.collections}
+                // onCollectionChange={props.onCollectionChange} 
+            />
         </div>
     );
 };

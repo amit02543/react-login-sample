@@ -1,7 +1,17 @@
 .home {
     width: 90%;
     max-width: 40rem;
-    padding: 3rem;
+    padding: 3rem 1rem;
     margin: 2rem auto;
     text-align: center;
+}
+
+
+.home .track-wrapper {
+    border-bottom: 1px solid #ccc;
+}
+
+
+.home .track-wrapper:last-child {
+    border-bottom: none;
 }
