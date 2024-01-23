@@ -1,7 +1,46 @@
 .likes {
-    padding-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 5rem;
 }
 
-.likes svg {
-    visibility: hidden;
+.likes.list>div.track-wrapper{
+    width: 60%;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.likes.list>div.track-wrapper:last-child{
+    border: none;
+}
+
+.likes.grid {
+    gap: 50px 50px;
+}
+
+.likes.grid>div.track-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.likes.column {
+    gap: 50px 50px;
+}
+
+.likes.column>div.track-wrapper {
+    height: unset;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.likes.column>div.track-wrapper>div:first-child {
+    display: block;
+}
+
+.likes.column>div.track-wrapper>div {
+    width: 100%;   
 }

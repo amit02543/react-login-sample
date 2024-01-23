@@ -21,16 +21,14 @@ const AddCollection = (props) => {
     collectionOptions && collectionOptions.unshift(<option key="" value="" disabled={true}> -- Select Collection -- </option>);
 
 
-    const onAddCollectionClickHandler = id => {
-        // event.preventDefault();
-        console.log(id, " => ", props.track.id);
+    const onAddCollectionClickHandler = () => {
         setIsDisabled(false);
     };
 
 
     const onCollectionChangeHandler = async (event, track) => {
+
         setSelectedCollection(event.target.value);
-        console.log(event.target.value, " => ", track);
 
         const headers = { 
             'Content-Type': 'application/json'
@@ -71,25 +69,20 @@ const AddCollection = (props) => {
 
     return (
         <div className='add-collection'>
-            <span onClick={() => onAddCollectionClickHandler(props.track.id)}>
+            <span onClick={onAddCollectionClickHandler}>
                 <abbr title="Add to collection">
-                    {/* <BsCollectionPlay onClick={props.onAddCollection} /> */}
                     <BsCollectionPlay />
                 </abbr>
             </span>
-            {/* <span> */}
-                <select 
-                    name='collection'
-                    id={props.track.id}
-                    value={selectedCollection}
-                    // onChange={props.onCollectionChange}
-                    onChange={(event) => onCollectionChangeHandler(event, props.track)}
-                    disabled={isDisabled}
-                >
-                    {collectionOptions}
-                    {/* <option> -- Select Collection -- </option> */}
-                </select>
-            {/* </span> */}
+            <select 
+                name='collection'
+                id={props.track.id}
+                value={selectedCollection}
+                onChange={(event) => onCollectionChangeHandler(event, props.track)}
+                disabled={isDisabled}
+            >
+                {collectionOptions}
+            </select>
         </div>
     )
 };
