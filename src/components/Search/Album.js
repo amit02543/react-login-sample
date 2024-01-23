@@ -114,7 +114,7 @@ const Album = ({ album, collections }) => {
             
             { !album.imageUrl && <div className='noimage'>No Image Found</div> }
 
-            <div className=''>
+            <div className='album-details'>
                 <h4>{album.name}</h4>
                 <ul className='itemlist'>{artists}</ul>
                 <p className='small'><b>Release Date: </b>{album.releaseDate}</p>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import ErrorPage from './pages/Error';
@@ -13,6 +13,7 @@ import SettingsPage from './pages/Settings';
 import NewMusicPage, { loader as latestMusicLoader} from './pages/NewMusic';
 import CollectionsPage, { loader as collectionMusicLoader } from './pages/Collections';
 import LikesPage, { loader as likesMusicLoader } from './pages/Likes';
+import AlbumsPage, { loader as loadUserAlbums } from './pages/Albums';
 import CollectionDetailsPage, { loader as CollectionMusicDetailsLoader } from './pages/CollectionDetails';
 import CollectionEditPage, { loader as CollectionDetailsLoader } from './pages/CollectionEdit';
 
@@ -66,6 +67,11 @@ const router = createBrowserRouter([
         path: 'likes',
         element: <LikesPage />,
         loader: likesMusicLoader
+      },
+      {
+        path: 'albums',
+        element: <AlbumsPage />,
+        loader: loadUserAlbums
       },
       {
         path: 'profile',

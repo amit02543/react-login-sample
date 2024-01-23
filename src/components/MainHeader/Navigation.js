@@ -126,6 +126,17 @@ const Navigation = () => {
                             </li>
                             <li>
                                 <NavLink
+                                    to="/albums"
+                                    className={({ isActive }) =>
+                                        isActive ? classes.active : undefined
+                                    }
+                                    end
+                                >
+                                Your Albums
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/profile"
                                     className={({ isActive }) =>
                                         isActive ? classes.active : undefined

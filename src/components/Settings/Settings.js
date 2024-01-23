@@ -22,7 +22,7 @@ const Settings = () => {
                 <div className={classes.value}><Style /></div>
             </div>
             <div className={classes.row}>
-                <div className={classes.label}>Toast Position</div>
+                <div className={classes.label}>Notification Position</div>
                 <div className={classes.value}><ToastOption /></div>
             </div>
         </Card>

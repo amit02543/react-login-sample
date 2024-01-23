@@ -1,0 +1,42 @@
+.albums {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 5rem;
+}
+
+.albums.list>div.album-wrapper{
+    width: 60%;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.albums.list>div.album-wrapper:last-child{
+    border: none;
+}
+
+.albums.grid {
+    gap: 50px 50px;
+}
+
+.albums.grid>div.album-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.albums.column {
+    gap: 50px 50px;
+}
+
+.albums.column>div.album-wrapper {
+    height: unset;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.albums.column>div.album-wrapper>div {
+    width: 100%;   
+}
