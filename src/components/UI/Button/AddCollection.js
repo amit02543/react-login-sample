@@ -26,7 +26,7 @@ const AddCollection = (props) => {
     };
 
 
-    const onCollectionChangeHandler = async (event, track) => {
+    const onCollectionChangeHandler = async (event, data) => {
 
         setSelectedCollection(event.target.value);
 
@@ -35,21 +35,40 @@ const AddCollection = (props) => {
         };
 
 
-        const requestBody = {
+        let requestBody = {
             username: username,
             name: event.target.value,
             type: 'song', 
-            spotifyId: track.id,
-            title: track.title,
-            artists: track.artists,
-            album: track.album,
-            duration: track.duration,
-            popularity: track.popularity,
-            imageUrl: track.imageUrl,
-            releaseDate: track.releaseDate,
+            spotifyId: data.id,
+            title: data.title,
+            artists: data.artists,
+            album: data.album,
+            duration: data.duration,
+            popularity: data.popularity,
+            imageUrl: data.imageUrl,
+            releaseDate: data.releaseDate,
             totalTracks: 0
         };
 
+
+        if(props.type === 'album') {
+
+            requestBody = {
+                username: username,
+                name: event.target.value,
+                type: 'album', 
+                spotifyId: data.id,
+                title: "",
+                artists: data.artists,
+                album: data.name,
+                duration: 0,
+                popularity: 0,
+                imageUrl: data.imageUrl,
+                releaseDate: data.releaseDate,
+                totalTracks: data.totalTracks
+            };
+
+        }
         
         await axios.post(
             `http://localhost:8080/collections`, 
@@ -76,9 +95,9 @@ const AddCollection = (props) => {
             </span>
             <select 
                 name='collection'
-                id={props.track.id}
+                id={props.data.id}
                 value={selectedCollection}
-                onChange={(event) => onCollectionChangeHandler(event, props.track)}
+                onChange={(event) => onCollectionChangeHandler(event, props.data)}
                 disabled={isDisabled}
             >
                 {collectionOptions}

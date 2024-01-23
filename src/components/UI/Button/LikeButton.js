@@ -9,36 +9,56 @@ import Toast from "../Toast/Toast";
 import './LikeButton.css';
 
 
-const LikeButton = ({ track }) => {
+const LikeButton = ({ type, data }) => {
 
     const username = localStorage.getItem('user');
 
-    const onTrackLike = async track => {
+    const onTrackLike = async data => {
 
         const headers = { 
             'Content-Type': 'application/json'
         };
 
 
-        const requestBody = { 
-            id: track.id,
-            title: track.title,
-            artists: track.artists,
-            album: track.album,
-            duration: track.duration,
-            popularity: track.popularity,
-            imageUrl: track.imageUrl,
-            releaseDate: track.releaseDate
-        };
+        let URL = `http://localhost:8080/user/${username}/likes`;
+
+
+        let requestBody = { 
+            id: data.id,
+            title: data.title,
+            artists: data.artists,
+            album: data.album,
+            duration: data.duration,
+            popularity: data.popularity,
+            imageUrl: data.imageUrl,
+            releaseDate: data.releaseDate
+        };    
+
+
+        if(type === 'album') {
+
+            URL = `http://localhost:8080/user/${username}/albums`;
+            
+            requestBody = { 
+                id: data.id,
+                name: data.name,
+                artists: data.artists,
+                imageUrl: data.imageUrl,
+                releaseDate: data.releaseDate,
+                totalTracks: data.totalTracks
+            };
+            
+        }
 
         
         await axios.post(
-            `http://localhost:8080/user/${username}/likes`, 
+            URL, 
             JSON.stringify(requestBody),
             { headers }
         )
         .then(res => {
-            const message = <span><b>{track.title}</b> song is added to your liked music.</span>;
+            let message = type === 'album' ? res.data.message : <span><b>{data.title}</b> song is added to your liked music.</span>;
+
             Toast('success', message);
         })
         .catch(err => {
@@ -50,7 +70,7 @@ const LikeButton = ({ track }) => {
 
 
     return (
-        <div onClick={() => onTrackLike(track)} className='like-btn'>
+        <div onClick={() => onTrackLike(data)} className='like-btn'>
             <span>
                 <abbr title="Like song">
                     <BsHandThumbsUp />

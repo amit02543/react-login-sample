@@ -10,10 +10,12 @@ const MusicAction = props => {
     return (
         <div className='music-actions'>
             <LikeButton 
-                track={props.data}
+                type={props.type}
+                data={props.data}
             />
             <AddCollection 
-                track={props.data} 
+                type={props.type} 
+                data={props.data} 
                 collections={props.collections}
             />
         </div>
