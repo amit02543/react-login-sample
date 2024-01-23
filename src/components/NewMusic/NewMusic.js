@@ -7,6 +7,7 @@ import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
 import './NewMusic.css';
+import MusicAction from "../UI/Button/MusicAction";
 
 
 const NewMusic = ({ data }) => {
@@ -17,8 +18,14 @@ const NewMusic = ({ data }) => {
 
     const [userCollections, setUserCollections] = useState(data.collections);
 
-    const albums = data.albums.map(album => <Album album={album} key={album.id} collections={userCollections} /> );
-
+    const albums = data.albums.map(album => { 
+        return (
+            <div className='album-wrapper' key={album.id}>
+                <Album album={album} key={album.id} collections={userCollections} />
+                <MusicAction type='album' data={album} collections={userCollections} />
+            </div>
+        );
+    });
     
     
     const viewChangeHandler = (event) => {

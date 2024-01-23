@@ -16,6 +16,7 @@ const Home = ({ data }) => {
         return <div key={track.id} className={classes["track-wrapper"]}>
             <Track track={track} collections={userCollections} />
             <MusicAction 
+                type='song'
                 data={track} 
                 collections={userCollections}
             />
