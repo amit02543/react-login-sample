@@ -17,6 +17,7 @@ const CollectionEdit = ({ data }) => {
     const [isFileSelector, setIsFileSelector] = useState(false);
     const [file, setFile] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -29,12 +30,16 @@ const CollectionEdit = ({ data }) => {
     const onImageChangeHandler = event => {
         setFile(event.target.files[0]);
         setFormIsValid(true);
+        setIsDisabled(false);
     };
 
 
     const onImageUploadHandler = async event => {
         event.preventDefault();
         console.log(file);
+
+        setIsSubmitting(true);
+        setIsDisabled(true);
 
         var formData = new FormData();
         formData.append('image', file);
@@ -56,6 +61,7 @@ const CollectionEdit = ({ data }) => {
             setEnteredImageUrl(res.data.profileUrl);
             setIsFileSelector(false);
             setFormIsValid(false);
+            setIsDisabled(false);
             window.location.reload(true);
         })
         .catch(err => {
@@ -64,6 +70,7 @@ const CollectionEdit = ({ data }) => {
             setIsSubmitting(false);
             setIsFileSelector(false);
             setFormIsValid(false);
+            setIsDisabled(false);
         });
         
     };
@@ -74,6 +81,12 @@ const CollectionEdit = ({ data }) => {
     };
 
 
+    const formatDate = date => {
+        let utcDate = new Date(date).toUTCString();
+
+        return utcDate.substring(utcDate.indexOf(' '), utcDate.lastIndexOf(' ')).trim();
+    }
+
 
     return (
         <>
@@ -83,8 +96,8 @@ const CollectionEdit = ({ data }) => {
                         <input type="file" id="myfile" name="myfile" onChange={onImageChangeHandler} />
                     </div>
                     <div className='actions'>
-                        <Button type="submit" className={classes.btn} onClick={onImageUploadHandler} disabled={!formIsValid}>
-                            Upload
+                        <Button type="submit" className={classes.btn} onClick={onImageUploadHandler} disabled={isDisabled}>
+                            { isSubmitting ? 'Submitting...' : 'Upload' }
                         </Button>
                         <Button type='link' className={classes.link} onClick={onUploadCancelHandler}>
                             Cancel
@@ -129,7 +142,7 @@ const CollectionEdit = ({ data }) => {
                         type="text"
                         id="createdDate"
                         name="createdDate"
-                        value={data.createdDate}
+                        value={formatDate(data.createdDate)}
                         class=''
                         readonly={true}
                     />
@@ -138,7 +151,7 @@ const CollectionEdit = ({ data }) => {
                         type="text"
                         id="updatedDate"
                         name="updatedDate"
-                        value={data.lastUpdatedDate}
+                        value={formatDate(data.lastUpdatedDate)}
                         class=''
                         readonly={true}
                     />

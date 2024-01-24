@@ -14,7 +14,7 @@ function CollectionEditPage() {
             <Await resolve={collectionByName}>
                 {
                     response => (
-                        <PageContent title={`Update ${response.name} collection!`}>
+                        <PageContent title={`Edit ${response.name} collection!`}>
                             <CollectionEdit data={response.data} />
                         </PageContent>
                     )

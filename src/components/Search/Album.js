@@ -79,7 +79,7 @@ const Album = ({ album, collections }) => {
             username: username,
             name: event.target.value,
             type: 'album', 
-            spotifyId: album.id,
+            id: album.id,
             title: "",
             artists: album.artists,
             album: album.name,
