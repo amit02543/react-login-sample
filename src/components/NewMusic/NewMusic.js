@@ -31,6 +31,8 @@ const NewMusic = ({ data }) => {
                     <MusicAction 
                         type='album' 
                         data={album} 
+                        islikeSelected={album.liked}
+                        selectedCollection={album.collection ? album.collection : ''}
                         collections={userCollections} 
                     />
                 }

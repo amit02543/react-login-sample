@@ -32,7 +32,7 @@ async function loadLatestMusic() {
 
     const username = localStorage.getItem('user');
     
-    const response = await fetch('http://localhost:8080/spotify/latest');
+    const response = await fetch(`http://localhost:8080/spotify/${username}/latest`);
 
     if(!response.ok) {
         throw json(
