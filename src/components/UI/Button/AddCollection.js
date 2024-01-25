@@ -12,7 +12,7 @@ const AddCollection = (props) => {
     const username = localStorage.getItem('user');
 
     const [isDisabled, setIsDisabled] = useState(true);
-    const [selectedCollection, setSelectedCollection] = useState("");
+    const [selectedCollection, setSelectedCollection] = useState(props.selectedCollection);
 
     const collectionOptions = props.collections && props.collections.map(collection => {
         return <option key={collection.id} value={collection.name}>{collection.name}</option>

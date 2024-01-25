@@ -12,11 +12,13 @@ const MusicAction = props => {
             <LikeButton 
                 type={props.type}
                 data={props.data}
+                isLiked={props.islikeSelected}
             />
             <AddCollection 
                 type={props.type} 
                 data={props.data} 
                 collections={props.collections}
+                selectedCollection={props.selectedCollection}
             />
         </div>
     );

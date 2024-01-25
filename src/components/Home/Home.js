@@ -23,7 +23,9 @@ const Home = ({ data }) => {
             { username &&                    
                 <MusicAction 
                     type='song'
-                    data={track} 
+                    data={track}
+                    islikeSelected={track.liked}
+                    selectedCollection={track.collection ? track.collection : ''}
                     collections={userCollections}
                 />
             }
