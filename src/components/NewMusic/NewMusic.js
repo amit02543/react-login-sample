@@ -12,17 +12,28 @@ import MusicAction from "../UI/Button/MusicAction";
 
 const NewMusic = ({ data }) => {
 
+    const username = localStorage.getItem('user');
     const viewType = localStorage.getItem('view-type');
 
-    const [checkedValue, setCheckedValue] = useState(viewType ? viewType : 'list');
+    const [selectedView, setSelectedView] = useState(viewType ? viewType : 'list');
 
     const [userCollections, setUserCollections] = useState(data.collections);
 
     const albums = data.albums.map(album => { 
         return (
             <div className='album-wrapper' key={album.id}>
-                <Album album={album} key={album.id} collections={userCollections} />
-                <MusicAction type='album' data={album} collections={userCollections} />
+                <Album 
+                    album={album} 
+                    key={album.id} 
+                    collections={userCollections} 
+                />
+                { username &&
+                    <MusicAction 
+                        type='album' 
+                        data={album} 
+                        collections={userCollections} 
+                    />
+                }
             </div>
         );
     });
@@ -32,7 +43,7 @@ const NewMusic = ({ data }) => {
 
         localStorage.setItem('view-type', event.target.value);
 
-        setCheckedValue(event.target.value);
+        setSelectedView(event.target.value);
     };
 
 
@@ -41,13 +52,13 @@ const NewMusic = ({ data }) => {
         var trendingClasses = document.getElementsByClassName('trending')[0].classList.value;
         trendingClasses = trendingClasses.replace('list', '').replace('column', '').replace('grid', '').trim();
 
-        document.getElementsByClassName('trending')[0].classList.value = trendingClasses + ' ' + checkedValue;
-    }, [checkedValue]);
+        document.getElementsByClassName('trending')[0].classList.value = trendingClasses + ' ' + selectedView;
+    }, [selectedView]);
 
     
     return (
         <>
-            <View checkedValue={checkedValue} onChange={viewChangeHandler} />
+            <View checkedValue={selectedView} onChange={viewChangeHandler} />
             <Card className='trending'>
                 {albums}
             </Card>

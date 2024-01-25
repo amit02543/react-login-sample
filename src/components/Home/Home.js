@@ -9,17 +9,24 @@ import classes from "./Home.module.css";
 
 const Home = ({ data }) => {
 
+    const username = localStorage.getItem('user');
+
     const [userCollections, setUserCollections] = useState(data.collections);
 
 
     const tracks = data.tracks.map((track) => { 
         return <div key={track.id} className={classes["track-wrapper"]}>
-            <Track track={track} collections={userCollections} />
-            <MusicAction 
-                type='song'
-                data={track} 
-                collections={userCollections}
+            <Track 
+                track={track} 
+                collections={userCollections} 
             />
+            { username &&                    
+                <MusicAction 
+                    type='song'
+                    data={track} 
+                    collections={userCollections}
+                />
+            }
         </div>
     });
 

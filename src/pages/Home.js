@@ -32,7 +32,7 @@ async function loadRandomMusic() {
 
     const username = localStorage.getItem('user');
 
-    const response = await fetch('http://localhost:8080/spotify/random');
+    const response = await fetch(`http://localhost:8080/spotify/${username}/random`);
 
     if(!response.ok) {
         throw json(

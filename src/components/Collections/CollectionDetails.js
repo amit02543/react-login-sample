@@ -6,7 +6,6 @@ import Track from "../Search/Track";
 import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
-// import classes from './CollectionDetails.module.css';
 import './CollectionDetails.css';
 
 
