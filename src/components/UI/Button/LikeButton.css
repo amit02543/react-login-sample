@@ -9,3 +9,7 @@
     height: 1.25rem;
     vertical-align: -webkit-baseline-middle;
 }
+
+.like-btn .active svg {
+    color: #f9c762;
+}

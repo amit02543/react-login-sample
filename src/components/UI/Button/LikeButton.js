@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
@@ -9,9 +9,11 @@ import Toast from "../Toast/Toast";
 import './LikeButton.css';
 
 
-const LikeButton = ({ type, data }) => {
+const LikeButton = ({ type, data, isLiked }) => {
 
     const username = localStorage.getItem('user');
+
+    const [isSongLiked, setIsSongLiked] = useState(isLiked);
 
     const onTrackLike = async data => {
 
@@ -57,11 +59,14 @@ const LikeButton = ({ type, data }) => {
             { headers }
         )
         .then(res => {
+            setIsSongLiked(true);
+            
             let message = type === 'album' ? res.data.message : <span><b>{data.title}</b> song is added to your liked music.</span>;
 
             Toast('success', message);
         })
         .catch(err => {
+            setIsSongLiked(false);
             console.log(err.response.data);
             Toast('error', err.response.data.message);
         });
@@ -71,9 +76,9 @@ const LikeButton = ({ type, data }) => {
 
     return (
         <div onClick={() => onTrackLike(data)} className='like-btn'>
-            <span>
+            <span className={`${isSongLiked ? 'active': ''}`}>
                 <abbr title="Like song">
-                    <BsHandThumbsUp />
+                    { isSongLiked ? <BsHandThumbsUpFill /> : <BsHandThumbsUp /> }
                 </abbr>
             </span>
         </div>

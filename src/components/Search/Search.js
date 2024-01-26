@@ -78,7 +78,7 @@ const Search = () => {
 
 
     const queryChangeHandler = event => {
-        setEnteredQuery(event.target.value.trim());
+        setEnteredQuery(event.target.value);
     
         setFormIsValid(
             event.target.value.trim().length > 2

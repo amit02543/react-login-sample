@@ -22,7 +22,7 @@ const AddCollection = (props) => {
 
 
     const onAddCollectionClickHandler = () => {
-        setIsDisabled(false);
+        setIsDisabled(!isDisabled);
     };
 
 
@@ -90,7 +90,7 @@ const AddCollection = (props) => {
         <div className='add-collection'>
             <span onClick={onAddCollectionClickHandler}>
                 <abbr title="Add to collection">
-                    <BsCollectionPlay />
+                    {selectedCollection ? <BsCollectionPlayFill /> : <BsCollectionPlay /> }
                 </abbr>
             </span>
             <select 
