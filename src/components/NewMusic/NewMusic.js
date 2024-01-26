@@ -25,7 +25,6 @@ const NewMusic = ({ data }) => {
                 <Album 
                     album={album} 
                     key={album.id} 
-                    collections={userCollections} 
                 />
                 { username &&
                     <MusicAction 

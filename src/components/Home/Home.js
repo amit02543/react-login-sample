@@ -18,7 +18,6 @@ const Home = ({ data }) => {
         return <div key={track.id} className={classes["track-wrapper"]}>
             <Track 
                 track={track} 
-                collections={userCollections} 
             />
             { username &&                    
                 <MusicAction 

@@ -1,26 +1,34 @@
 import React from "react";
 
-import { FaDiamond } from "react-icons/fa6";
-
-import classes from './Search.module.css';
+import './Artist.css';
 
 const Artist = ({ artist }) => {
 
-    const genres = artist.genres.map(genre => <li key={genre}>{genre}</li>);
+    const genres = artist.genres.map( genre => <li key={genre}>{genre}</li> );
 
     return (
-        <div className={classes.wrapper} key={artist.id}>
-            { artist.imageUrl && <img src={artist.imageUrl} alt="artist" width="100" height="100" /> }
+        <div className='artist' key={artist.id}>
+            { artist.imageUrl && <img src={artist.imageUrl} alt="artist" /> }
             
-            { !artist.imageUrl && <div className={classes.noimage}>No Image Found</div> }
+            { !artist.imageUrl && <div className='noimage'>No Image Found</div> }
 
-            <div className=''>
-                <h4>{artist.name}</h4>
-                <ul className={classes.itemlist}>{genres}</ul>
-                <p>
-                    <span><b>Followers: </b>{artist.followers.toLocaleString()}</span>
-                    <FaDiamond />
-                    <span><b>Popularity: </b>{artist.popularity}</span>
+            <div className='artist-details'>
+                <h4>
+                    {artist.name}
+                </h4>
+
+                <ul className='itemlist'>
+                    {genres}
+                </ul>
+                
+                <p className='small'>
+                    <b>Followers: </b>
+                    {artist.followers.toLocaleString()}
+                </p>
+                
+                <p className='small'>
+                    <b>Popularity: </b>
+                    {artist.popularity}
                 </p>
             </div>
             

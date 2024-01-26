@@ -1,4 +1,4 @@
-.album {
+.artist {
     display: flex;
     width: 100%;
     padding: 1rem 1rem 0.5rem 1rem;
@@ -7,62 +7,63 @@
     box-sizing: border-box;
 }
 
-.album img,
-.album .noimage {
+.artist img,
+.artist .noimage {
     width: 8rem;
     height: 8rem;
-    float: left;
     margin-right: 1rem;
     border-radius: 0.5rem;
 }
 
-.album .noimage {
+.artist .noimage {
     border: 1px solid #f9c762;
     padding: 2rem 1rem 0;
     font-weight: bold;
 }
 
-.album .itemlist {
+.artist .itemlist {
     padding-left: 0;
 }
 
-.album .itemlist li {
+.artist .itemlist li {
     display: inline;
 }
 
-.album .itemlist li:before {
+.artist .itemlist li:before {
     content: " | "
 }
 
-.album .itemlist li:first-child:before {
+.artist .itemlist li:first-child:before {
     content: ""
 }
 
-.grid .album img,
-.grid .album .noimage {
+.grid .artist img,
+.grid .artist .noimage {
     width: 14rem;
     height: 13.5rem;
     margin-right: 1rem;
 }
 
-.grid .album h4,
-.grid .album .itemlist {
+.grid .artist h4,
+.grid .artist p,
+.grid .artist .itemlist {
     width: 14rem;
 }
 
-.column .album img,
-.column .album .noimage {
+.column .artist img,
+.column .artist .noimage {
     width: 20rem;
     height: 20rem;
     margin-bottom: 1.5rem;
     margin-right: 0;
 }
 
-.column .album h4,
-.column .album .itemlist {
+.column .artist h4,
+.column .artist p,
+.column .artist .itemlist {
     width: 20rem;
 }
 
 .small {
-    font-size: 14px;
+    font-size: 12px;
 }
