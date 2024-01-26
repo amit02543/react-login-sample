@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
-import axios from "axios";
 
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import Input from "../UI/Input/Input";
+import Select from "../UI/Input/Select";
+import Toast from "../UI/Toast/Toast";
+
+import api from "../../Helpers/AxiosClient";
 
 import classes from './Collections.module.css';
-import Select from "../UI/Input/Select";
 
 
 const Collections = ({ data }) => {
 
     const [enteredCollection, setEnteredCollection] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [collectionData, setCollectionData] = useState(data);
     const [selectedType, setSelectedType] = useState('name_asc');
@@ -132,26 +134,19 @@ const Collections = ({ data }) => {
         };
 
 
-        const headers = { 
-            'Content-Type': 'application/json'
-        };
-
-        await axios.post(
-            `http://localhost:8080/user/${username}/collections`, 
-            collectionData, 
-            { headers }
-        )
+        api.addUserCollection(username, collectionData)
         .then(res => {
             setCollectionData(res.data);
             setEnteredCollection('');
-            setErrorMessage('');
             setIsSubmitting(false);
+
+            const message = <span><b>{enteredCollection}</b> collection is added successfully</span>
+            Toast('success', message);
         })
         .catch(err => {
-            console.log(err.response.data);
             setEnteredCollection('');
-            setErrorMessage(err.response.data.message);
             setIsSubmitting(false);
+            Toast('error', err.response.data.message);
         });
 
     };
@@ -186,8 +181,6 @@ const Collections = ({ data }) => {
     return (
         <Card className={classes.collections}>
 
-            {errorMessage && <p style={ { color: 'red', paddingTop: '1rem' } }>{errorMessage}</p>}
-
             <div className={classes['collection-sort']}>
                 <Select
                     id="type"
@@ -215,7 +208,11 @@ const Collections = ({ data }) => {
                     <Button type="submit" className={classes.btn} disabled={!isFormValid}>
                         { isSubmitting ? 'Submitting...' : 'Add' }
                     </Button>
-                    <Button type="submit" onClick={clearHandler} className={classes.btnSecondary} disabled={enteredCollection.length === 0}>
+                    <Button type="submit" 
+                        onClick={clearHandler} 
+                        className={classes.btnSecondary} 
+                        disabled={enteredCollection.length === 0}
+                    >
                         Clear
                     </Button>
                 </div>
@@ -224,7 +221,7 @@ const Collections = ({ data }) => {
             <hr/>
 
             <div className={classes['collection-wrapper']}>
-                { !collectionData && <p>You have not added any collection yet.</p> }
+                { !collectionData && <p><b>You have not added any collection yet.</b></p> }
                 { collectionData && collections }
             </div>
 

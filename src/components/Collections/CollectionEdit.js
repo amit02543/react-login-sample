@@ -6,20 +6,20 @@ import axios from "axios";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import Input from "../UI/Input/Input";
+import Toast from "../UI/Toast/Toast";
+
+import api from "../../Helpers/AxiosClient";
 
 import classes from './CollectionEdit.module.css';
 
 
 const CollectionEdit = ({ data }) => {
 
-    const [enteredImageUrl, setEnteredImageUrl] = useState(data.imageUrl);
-    const [formIsValid, setFormIsValid] = useState(false);
+    const [enteredImageUrl, setEnteredImageUrl] = useState(data.imageUrl ? data.imageUrl : '');
     const [isFileSelector, setIsFileSelector] = useState(false);
     const [file, setFile] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
-    const [message, setMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
 
 
     const updateCollectionImageHandler = () => {
@@ -29,14 +29,12 @@ const CollectionEdit = ({ data }) => {
 
     const onImageChangeHandler = event => {
         setFile(event.target.files[0]);
-        setFormIsValid(true);
         setIsDisabled(false);
     };
 
 
     const onImageUploadHandler = async event => {
         event.preventDefault();
-        console.log(file);
 
         setIsSubmitting(true);
         setIsDisabled(true);
@@ -44,33 +42,19 @@ const CollectionEdit = ({ data }) => {
         var formData = new FormData();
         formData.append('image', file);
 
-        await axios.post(
-            `http://localhost:8080/user/${data.username}/collections/${data.name}/upload`, 
-            formData, 
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }
-        )
+        api.uploadUserCollectionImage(data.username, data.name, formData)
         .then(res => {
-            console.log(res);
-            setErrorMessage('');
             setIsSubmitting(false);
-            setMessage(res.data.message);
-            setEnteredImageUrl(res.data.profileUrl);
+            setEnteredImageUrl(res.data.imageUrl);
             setIsFileSelector(false);
-            setFormIsValid(false);
             setIsDisabled(false);
-            window.location.reload(true);
+            Toast('success', 'Collection image uploaded successfully');
         })
         .catch(err => {
-            console.log(err.response.data);
-            setErrorMessage(err.response.data.message);
             setIsSubmitting(false);
             setIsFileSelector(false);
-            setFormIsValid(false);
             setIsDisabled(false);
+            Toast('error', err.response.data.message);
         });
         
     };
@@ -113,10 +97,6 @@ const CollectionEdit = ({ data }) => {
                     { !enteredImageUrl && <FaImage /> }
                     <span onClick={updateCollectionImageHandler}><b>Update</b></span>
                 </div>
-
-                { message && <p className={classes.success}>{message}</p>}
-
-                { errorMessage && <p className={classes.error}>{errorMessage}</p> }
 
                 <div className={classes.collectionDetail}>
                     <Input

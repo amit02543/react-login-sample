@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import Card from '../UI/Card/Card';
 import Track from '../Search/Track';
+import Card from '../UI/Card/Card';
 import View from '../UI/View/View';
 
 import './Likes.css';

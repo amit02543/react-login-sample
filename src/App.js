@@ -6,7 +6,7 @@ import HomePage, { loader as randomMusicLoader } from './pages/Home';
 import RootLayout from './pages/Root';
 import LoginPage, { action as loginAction } from './pages/Login';
 import ProfilePage, { loader as profileLoader } from './pages/Profile';
-import RegisterPage from './pages/Register';
+import RegisterPage, { action as registerAction } from './pages/Register';
 import { action as logoutAction } from './pages/Logout';
 import SearchPage from './pages/Search';
 import SettingsPage from './pages/Settings';
@@ -37,7 +37,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'register',
-        element: <RegisterPage />
+        element: <RegisterPage />,
+        action: registerAction
       },
       {
         path: 'search',

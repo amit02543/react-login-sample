@@ -1,8 +1,11 @@
 import { Suspense } from 'react';
-import { Await, defer, json, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 
 import Home from '../components/Home/Home';
 import PageContent from '../components/PageContent/PageContent';
+import Toast from '../components/UI/Toast/Toast';
+
+import api from '../Helpers/AxiosClient';
 
 
 function HomePage() {
@@ -32,30 +35,23 @@ async function loadRandomMusic() {
 
     const username = localStorage.getItem('user');
 
-    const response = await fetch(`http://localhost:8080/spotify/${username}/random`);
+    const responseData = {
+        tracks: [],
+        collections: []
+    };
 
-    if(!response.ok) {
-        throw json(
-            { message: 'Could not fetch random music.'},
-            { status: 500 }
-        );
-    } 
+
+    await api.fetchRandomSongs(username)
+        .then(response => responseData.tracks = response.data.tracks )
+        .catch(err => Toast('error', err.response.data.message));
+
     
-    const randomData = await response.json();
+    await api.fetchUserCollection(username)
+        .then(response => responseData.collections = response.data )
+        .catch(err => Toast('error', err.response.data.message));
 
-    
-    const collectionResponse = await fetch(`http://localhost:8080/user/${username}/collections`);
 
-    if(!collectionResponse.ok) {
-        throw json(
-            { message: 'Could not fetch user collections name.'},
-            { status: 500 }
-        );
-    } 
-    
-    const collectionData = await collectionResponse.json();
-
-    return { tracks: randomData.tracks, collections: collectionData };
+    return responseData;
 };
 
 

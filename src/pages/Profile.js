@@ -1,16 +1,20 @@
 import { Suspense } from 'react';
-import { useLoaderData, json, defer, Await } from 'react-router-dom';
+import { useLoaderData, defer, Await } from 'react-router-dom';
 
 import PageContent from '../components/PageContent/PageContent';
 import Profile from '../components/Profile/Profile';
+import Toast from '../components/UI/Toast/Toast';
+
+import api from '../Helpers/AxiosClient';
+
 
 function ProfilePage() {
 
-    const { events } = useLoaderData();
+    const { profile } = useLoaderData();
 
     return (
         <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
-            <Await resolve={events}>
+            <Await resolve={profile}>
                 { response => (
                     <PageContent title="Your Profile">
                         <Profile data={response} />
@@ -28,23 +32,20 @@ async function loadProfile() {
 
     const username = localStorage.getItem('user');
 
-    const response = await fetch(`http://localhost:8080/profile/${username}`);
-  
-    if (!response.ok) {
-        throw json(
-            { message: 'Could not fetch user profile.' },
-            { status: 500 }
-        );
-    } else {
-        const resData = await response.json();
-        return resData;
-    }
+    let responseData;
+
+    await api.fetchUserProfile(username)
+        .then(response => responseData = response.data)
+        .catch(err => Toast('error', err.response.data.message));
+
+
+    return responseData;
 }
   
 
 export function loader() {
     return defer({
-        events: loadProfile(),
+        profile: loadProfile(),
     });
 }
   

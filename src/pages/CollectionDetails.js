@@ -1,8 +1,12 @@
 import { Suspense } from 'react';
-import { Await, defer, json, redirect, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 
 import CollectionDetails from '../components/Collections/CollectionDetails';
 import PageContent from '../components/PageContent/PageContent';
+import Toast from '../components/UI/Toast/Toast';
+
+import api from '../Helpers/AxiosClient';
+
 
 function CollectionDetailsPage() {
 
@@ -31,20 +35,17 @@ async function loadUserCollectionMusicByName(collectionName) {
 
     const username = localStorage.getItem('user');
 
-    const response = await fetch(`http://localhost:8080/user/${username}/collections/${collectionName}`);
+    const responseData = {
+        name: collectionName,
+        data: []
+    };
 
-    if(!response.ok) {
-        throw json(
-            { message: 'Could not fetch user collection music'},
-            { status: 500 }
-        )
-    }
+    await api.fetchUserCollectionByName(username, collectionName)
+        .then(response => responseData.data = response.data)
+        .catch(err => Toast('error', err.response.data.message));
 
 
-    const resData = await response.json();
-
-    return { name: collectionName, data: resData };
-    // return resData;
+    return responseData;
 }
 
 

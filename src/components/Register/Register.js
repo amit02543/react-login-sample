@@ -1,59 +1,27 @@
 import React, { useState } from 'react';
-import { Link, redirect } from 'react-router-dom';
-import axios from 'axios';
+import { Form, Link, useActionData, useNavigation } from 'react-router-dom';
 
+import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
+import Input from '../UI/Input/Input';
 
 import classes from './Register.module.css';
-import Button from '../UI/Button/Button';
-import Input from '../UI/Input/Input';
+
 
 const Register = () => {
 
-    const [enteredUsername, setEnteredUsername] = useState('');
-    const [enteredEmail, setEnteredEmail] = useState('');
-    const [enteredPassword, setEnteredPassword] = useState('');
-    const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
+    const data = useActionData();
+
+    const navigation = useNavigation();
+
+
+    const [enteredUsername, setEnteredUsername] = useState(data ? data.username : '');
+    const [enteredEmail, setEnteredEmail] = useState(data ? data.email : '');
+    const [enteredPassword, setEnteredPassword] = useState(data ? data.password : '');
+    const [enteredConfirmPassword, setEnteredConfirmPassword] = useState(data ? data.confirmPassword : '');
     const [formIsValid, setFormIsValid] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [message, setMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    
 
-    const registerHandler = async () => {
-        setIsSubmitting(true);
-
-        const headers = { 
-            'Content-Type': 'application/json'
-        };
-
-
-        const requestBody = {
-            username: enteredUsername, 
-            email: enteredEmail, 
-            password: enteredPassword, 
-            confirmPassword: enteredConfirmPassword
-        };
-
-        
-        await axios.post(
-            'http://localhost:8080/register', 
-            JSON.stringify(requestBody),
-            { headers }
-        )
-        .then(res => {
-            console.log(res);
-            setErrorMessage('');
-            setIsSubmitting(false);
-            setMessage(res.data.message);
-        })
-        .catch(err => {
-            console.log(err.response.data);
-            setErrorMessage(err.response.data.message);
-            setIsSubmitting(false);
-        });
-
-    };
+    const isSubmitting = navigation.state === 'submitting';
 
 
     const usernameChangeHandler = (event) => {
@@ -108,61 +76,16 @@ const Register = () => {
     };
 
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        registerHandler();
-    };
-
-
 
     return (
         <Card className={classes.register}>
-            { message && <p className={classes.success}>{message}</p>}
-            { errorMessage && <p className={classes.error}>{errorMessage}</p> }
-
-            <form onSubmit={submitHandler}>
-                {/* <div className={classes.control}>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        value={enteredUsername}
-                        onChange={usernameChangeHandler}
-                    />
-                </div>
-                <div className={classes.control}>
-                    <label htmlFor="email">E-Mail</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={enteredEmail}
-                        onChange={emailChangeHandler}
-                    />
-                </div>
-                <div className={classes.control}>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={enteredPassword}
-                        onChange={passwordChangeHandler}
-                    />
-                </div>
-                <div className={classes.control}>
-                    <label htmlFor="cpassword">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="cpassword"
-                        value={enteredConfirmPassword}
-                        onChange={confirmPasswordChangeHandler}
-                    />
-                </div> */}
+            <Form method='post'>
                 <Input
                     label="Username"
                     type="text"
                     id="username"
                     name="username"
-                    placeholder="Enter username here"
+                    placeholder=""
                     value={enteredUsername}
                     onChange={usernameChangeHandler}
                     class=''
@@ -172,7 +95,7 @@ const Register = () => {
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="Enter email here"
+                    placeholder=""
                     value={enteredEmail}
                     onChange={emailChangeHandler}
                     class=''
@@ -182,7 +105,7 @@ const Register = () => {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="Enter password here"
+                    placeholder=""
                     value={enteredPassword}
                     onChange={passwordChangeHandler}
                     class=''
@@ -192,7 +115,7 @@ const Register = () => {
                     type="password"
                     id="cpassword"
                     name="cpassword"
-                    placeholder="Enter confirm password here"
+                    placeholder=""
                     value={enteredConfirmPassword}
                     onChange={confirmPasswordChangeHandler}
                     class=''
@@ -205,7 +128,7 @@ const Register = () => {
                         Cancel
                     </Link>
                 </div>
-            </form>
+            </Form>
         </Card>
     );
 }

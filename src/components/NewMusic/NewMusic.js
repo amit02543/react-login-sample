@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { MdViewList, MdViewModule, MdViewWeek } from "react-icons/md";
-
 import Album from "../Search/Album";
+import MusicAction from "../UI/Button/MusicAction";
 import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
 import './NewMusic.css';
-import MusicAction from "../UI/Button/MusicAction";
 
 
 const NewMusic = ({ data }) => {

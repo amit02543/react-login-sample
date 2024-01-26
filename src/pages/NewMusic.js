@@ -1,8 +1,11 @@
 import { Suspense } from 'react';
-import { Await, defer, json, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 
 import NewMusic from '../components/NewMusic/NewMusic';
 import PageContent from '../components/PageContent/PageContent';
+import Toast from '../components/UI/Toast/Toast';
+
+import api from '../Helpers/AxiosClient';
 
 
 function NewMusicPage() {
@@ -31,31 +34,24 @@ export default NewMusicPage;
 async function loadLatestMusic() {
 
     const username = localStorage.getItem('user');
+
+    const responseData = {
+        albums: [],
+        collections: []
+    };
+
+
+    await api.fetchLatestAlbums(username)
+        .then(response => responseData.albums = response.data.albums )
+        .catch(err => Toast('error', err.response.data.message));
+
     
-    const response = await fetch(`http://localhost:8080/spotify/${username}/latest`);
-
-    if(!response.ok) {
-        throw json(
-            { message: 'Could not fetch latest music'},
-            { status: 500 }
-        );
-    }
-
-    const latestAlbumData = await response.json();
+    await api.fetchUserCollection(username)
+        .then(response => responseData.collections = response.data )
+        .catch(err => { Toast('error', err.response.data.message) });
 
 
-    const collectionResponse = await fetch(`http://localhost:8080/user/${username}/collections`);
-
-    if(!collectionResponse.ok) {
-        throw json(
-            { message: 'Could not fetch user collections name.'},
-            { status: 500 }
-        );
-    } 
-
-    const collectionData = await collectionResponse.json();
-
-    return { albums: latestAlbumData.albums, collections: collectionData };
+    return responseData;
 };
 
 

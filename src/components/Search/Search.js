@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-import Button from '../UI/Button/Button';
-import Card from '../UI/Card/Card';
 
 import classes from './Search.module.css';
 import Artist from './Artist';
 import Album from './Album';
 import Track from './Track';
+
+import Button from '../UI/Button/Button';
+import Card from '../UI/Card/Card';
 import Input from '../UI/Input/Input';
 import Select from '../UI/Input/Select';
+
+import api from '../../Helpers/AxiosClient';
+
 
 const Search = () => {
 
@@ -38,27 +40,18 @@ const Search = () => {
     });
     
 
-    const albums = albumsData.map(album => <Album album={album} /> );
+    const albums = albumsData.map(album => <Album album={album} key={album.id} /> );
 
-    const artists = artistsData.map(artist => <Artist artist={artist} /> );
+    const artists = artistsData.map(artist => <Artist artist={artist} key={artist.id} /> );
 
-    const tracks = tracksData.map(track => <Track track={track} /> );
+    const tracks = tracksData.map(track => <Track track={track} key={track.id} />);
 
 
     const search = async () => {
+        
         setIsSubmitting(true);
 
-        const username = localStorage.getItem('user');
-
-        const headers = { 
-            'Content-Type': 'application/json'
-        };
-
-        
-        await axios.get(
-            `http://localhost:8080/spotify/search?query=${enteredQuery}&type=${selectedType}`,
-            { headers }
-        )
+        api.fetchResultBySearchTermAndType(enteredQuery, selectedType)
         .then(res => {
             setSearchData(res.data);
             setAlbumsData(res.data.albums);
@@ -108,25 +101,6 @@ const Search = () => {
             { errorMessage && <p style={ { color: 'red' } }>{errorMessage}</p> }
 
             <form onSubmit={submitHandler}>
-                {/* <div className={`${classes.control} ${classes.w70} ${classes.floatLeft}`}>
-                    <input
-                        type="text"
-                        id="search"
-                        placeholder='Search query here'
-                        value={enteredQuery}
-                        onChange={queryChangeHandler}
-                    />
-                </div>
-                <div className={`${classes.control} ${classes.w25} ${classes.floatRight}`}>
-                    <select 
-                        name="type" 
-                        id="type" 
-                        onChange={typeChangeHandler}
-                        value={selectedType}
-                    >
-                        {searchTypeOptions}
-                    </select>
-                </div> */}
                 <div className={classes.row}>
                     <Input
                         type="text"

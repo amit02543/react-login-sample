@@ -1,8 +1,11 @@
 import { Suspense } from 'react';
-import { Await, defer, json, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 
 import Albums from '../components/Albums/Albums';
 import PageContent from '../components/PageContent/PageContent';
+import Toast from '../components/UI/Toast/Toast';
+
+import api from '../Helpers/AxiosClient';
 
 
 function AlbumsPage() {
@@ -32,20 +35,14 @@ async function loadUserAlbums() {
 
     const username = localStorage.getItem('user');
 
-    const response = await fetch(`http://localhost:8080/user/${username}/albums`);
+    let responseData;
 
+    await api.fetchLikedAlbums(username)
+        .then(response => responseData = response.data )
+        .catch(err => Toast('error', err.response.data.message));
+        
 
-    if(!response.ok) {
-        throw json(
-            { message: 'Could not fetch user albums'},
-            { status: 500 }
-        )
-    }
-
-
-    const resData = response.json();
-
-    return resData;
+    return responseData;
 }
 
 
