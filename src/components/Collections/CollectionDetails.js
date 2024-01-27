@@ -6,6 +6,8 @@ import Track from "../Search/Track";
 import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
+import Wrapper from '../../Helpers/Wrapper';
+
 import './CollectionDetails.css';
 
 
@@ -63,7 +65,7 @@ const CollectionDetails = ({ data }) => {
 
 
     return (
-        <>
+        <Wrapper>
             <View checkedValue={selectedView} onChange={viewChangeHandler} />
 
             { collectionData.length === 0 && (
@@ -78,7 +80,7 @@ const CollectionDetails = ({ data }) => {
 
                     { albums.length === 0 && <p>No album added for this collection.</p> }
 					  
-                    { albums.length > 0 && <>{albums}</> }
+                    { albums.length > 0 && <Wrapper>{albums}</Wrapper> }
 
                 </Card>
             }
@@ -89,11 +91,11 @@ const CollectionDetails = ({ data }) => {
 
                     { songs.length === 0 && <p>No song added for this collection.</p> }
                     
-                    { songs.length > 0 && <>{songs}</> }
+                    { songs.length > 0 && <Wrapper>{songs}</Wrapper> }
 
                 </Card>
             }
-        </>
+        </Wrapper>
         
     )
 };

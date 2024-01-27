@@ -32,11 +32,11 @@ async function loadProfile() {
 
     const username = localStorage.getItem('user');
 
-    let responseData;
+    let responseData = {};
 
     await api.fetchUserProfile(username)
         .then(response => responseData = response.data)
-        .catch(err => Toast('error', err.response.data.message));
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
 
     return responseData;

@@ -9,6 +9,7 @@ import Select from '../UI/Input/Select';
 import Toast from '../UI/Toast/Toast';
 
 import api from '../../Helpers/AxiosClient';
+import Wrapper from '../../Helpers/Wrapper';
 
 import classes from './Profile.module.css';
 
@@ -61,7 +62,7 @@ const Profile = ({ data }) => {
         })
         .catch(err => {
             setIsSubmitting(false);
-            Toast('error', err.response.data.message);
+            Toast('error', err.response ? err.response.data.message : err.message);
         });
 
     };
@@ -117,7 +118,12 @@ const Profile = ({ data }) => {
 
 
     const updateProfilePictureHandler = () => {
-        setIsFileSelector(true);
+        
+        if(!data.username) {
+            setIsFileSelector(true);
+        } else {
+            Toast('info', 'Action is not allowed at this moment. Please try again later.');
+        }
     };
 
 
@@ -149,11 +155,10 @@ const Profile = ({ data }) => {
             window.location.reload(true);
         })
         .catch(err => {
-            console.log(err.response.data);
             setIsSubmitting(false);
             setIsFileSelector(false);
             setIsUploadDisabled(true);
-            Toast('error', err.response.data.message);
+            Toast('error', err.response ? err.response.data.message : err.message);
         });
         
     };
@@ -166,7 +171,7 @@ const Profile = ({ data }) => {
 
 
     return (
-        <>
+        <Wrapper>
             { isFileSelector && 
                 <div className={classes.overlay}>
                     <div className={classes.control}>
@@ -185,110 +190,110 @@ const Profile = ({ data }) => {
 
             <Card className={classes.profile}>
 
-            <div>
-                <div className={`${classes.w100} ${classes.profilePic}`}>
-                    { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
-                    { !enteredProfileUrl && <FaUser /> }
-                    <span onClick={updateProfilePictureHandler}><b>Update</b></span>
-                </div>
-            </div>
-
-            <div className={`${classes.control} ${!isFormEditable ? 'textRight marTop30' : classes.hidden}`}>
-                <MdEdit onClick={editFormHandler} />
-            </div>
-
-            { !isFormEditable && 
                 <div>
-                    <Input
-                        label="Username"
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={enteredUsername}
-                        class=''
-                        readonly={true}
-                    />
-                    <Input
-                        label="Name"
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={enteredName}
-                        class=''
-                        readonly={true}
-                    />
-                    <Input
-                        label="Pronoun"
-                        type="text"
-                        id="pronoun"
-                        name="pronoun"
-                        value={enteredPronoun}
-                        class=''
-                        readonly={true}
-                    />
-                    <Input
-                        label="Email"
-                        type="text"
-                        id="email"
-                        name="email"
-                        value={enteredEmail}
-                        class=''
-                        readonly={true}
-                    />
-                </div>
-            }
-
-            { isFormEditable && 
-
-                <form onSubmit={submitHandler}>
-                    <Input
-                        label="Username"
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={enteredUsername}
-                        class=''
-                        readonly={true}
-                    />
-                    <Input
-                        label="Name"
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={enteredName}
-                        onChange={nameChangeHandler}
-                        class=''
-                    />
-                    <Select
-                        label="Pronoun"
-                        id="pronoun"
-                        name="pronoun"
-                        value={enteredPronoun}
-                        onChange={pronounChangeHandler}
-                        options={pronounOptions}
-                        class=''
-                    />
-                    <Input
-                        label="E-Mail"
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={enteredEmail}
-                        onChange={emailChangeHandler}
-                        class=''
-                    />
-                    <div className='actions'>
-                        <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-                            { isSubmitting ? 'Submitting...' : 'Update' }
-                        </Button>
-                        <Button type='link' className={classes.link} onClick={onCancelHandler}>
-                            Cancel
-                        </Button>
+                    <div className={`${classes.w100} ${classes.profilePic}`}>
+                        { enteredProfileUrl && <img src={enteredProfileUrl} alt='profile' /> }
+                        { !enteredProfileUrl && <FaUser /> }
+                        <span onClick={updateProfilePictureHandler}><b>Update</b></span>
                     </div>
-                </form>
-            }
+                </div>
+
+                <div className={`${classes.control} ${data.username && !isFormEditable ? 'textRight marTop30' : classes.hidden}`}>
+                    <MdEdit onClick={editFormHandler} />
+                </div>
+
+                { !isFormEditable && 
+                    <div>
+                        <Input
+                            label="Username"
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={enteredUsername}
+                            class=''
+                            readonly={true}
+                        />
+                        <Input
+                            label="Name"
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={enteredName}
+                            class=''
+                            readonly={true}
+                        />
+                        <Input
+                            label="Pronoun"
+                            type="text"
+                            id="pronoun"
+                            name="pronoun"
+                            value={enteredPronoun}
+                            class=''
+                            readonly={true}
+                        />
+                        <Input
+                            label="Email"
+                            type="text"
+                            id="email"
+                            name="email"
+                            value={enteredEmail}
+                            class=''
+                            readonly={true}
+                        />
+                    </div>
+                }
+
+                { isFormEditable && 
+
+                    <form onSubmit={submitHandler}>
+                        <Input
+                            label="Username"
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={enteredUsername}
+                            class=''
+                            readonly={true}
+                        />
+                        <Input
+                            label="Name"
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={enteredName}
+                            onChange={nameChangeHandler}
+                            class=''
+                        />
+                        <Select
+                            label="Pronoun"
+                            id="pronoun"
+                            name="pronoun"
+                            value={enteredPronoun}
+                            onChange={pronounChangeHandler}
+                            options={pronounOptions}
+                            class=''
+                        />
+                        <Input
+                            label="E-Mail"
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={enteredEmail}
+                            onChange={emailChangeHandler}
+                            class=''
+                        />
+                        <div className='actions'>
+                            <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+                                { isSubmitting ? 'Submitting...' : 'Update' }
+                            </Button>
+                            <Button type='link' className={classes.link} onClick={onCancelHandler}>
+                                Cancel
+                            </Button>
+                        </div>
+                    </form>
+                }
             </Card>  
-        </>      
+        </Wrapper>
     );
 };
 

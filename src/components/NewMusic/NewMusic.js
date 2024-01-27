@@ -5,6 +5,8 @@ import MusicAction from "../UI/Button/MusicAction";
 import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
+import Wrapper from '../../Helpers/Wrapper';
+
 import './NewMusic.css';
 
 
@@ -56,12 +58,12 @@ const NewMusic = ({ data }) => {
 
     
     return (
-        <>
+        <Wrapper>
             <View checkedValue={selectedView} onChange={viewChangeHandler} />
             <Card className='trending'>
                 {albums}
             </Card>
-        </>
+        </Wrapper>
         
     );
 };

@@ -1,7 +1,9 @@
 import { useRouteError } from 'react-router-dom';
-import MainHeader from '../components/MainHeader/MainHeader';
 
+import MainHeader from '../components/MainHeader/MainHeader';
 import PageContent from '../components/PageContent/PageContent';
+import Wrapper from '../Helpers/Wrapper';
+
 
 function ErrorPage() {
     const error = useRouteError();
@@ -19,12 +21,12 @@ function ErrorPage() {
     }
 
     return (
-        <>
+        <Wrapper>
             <MainHeader />
             <PageContent title={title}>
                 <p>{message}</p>
             </PageContent>
-        </>
+        </Wrapper>
     );
 }
 

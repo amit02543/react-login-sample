@@ -43,12 +43,12 @@ async function loadLatestMusic() {
 
     await api.fetchLatestAlbums(username)
         .then(response => responseData.albums = response.data.albums )
-        .catch(err => Toast('error', err.response.data.message));
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
     
     await api.fetchUserCollection(username)
         .then(response => responseData.collections = response.data )
-        .catch(err => { Toast('error', err.response.data.message) });
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
 
     return responseData;

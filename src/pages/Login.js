@@ -38,9 +38,9 @@ export async function action({ request }) {
             Toast('success', response.data.message);
             responseData = response.data; 
         })
-        .catch(err => { 
-            Toast('error', err.response.data.message);
-            error = err.response.data; 
+        .catch(err => {
+            Toast('error', err.response ? err.response.data.message : err.message);
+            error = err.response ? err.response.data : err; 
         });
 
 

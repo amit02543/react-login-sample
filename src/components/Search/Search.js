@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import classes from './Search.module.css';
 import Artist from './Artist';
 import Album from './Album';
 import Track from './Track';
@@ -10,8 +9,11 @@ import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 import Input from '../UI/Input/Input';
 import Select from '../UI/Input/Select';
+import Toast from '../UI/Toast/Toast';
 
 import api from '../../Helpers/AxiosClient';
+
+import classes from './Search.module.css';
 
 
 const Search = () => {
@@ -20,7 +22,6 @@ const Search = () => {
     const [selectedType, setSelectedType] = useState('');
     const [formIsValid, setFormIsValid] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
     const [searchData, setSearchData] = useState();
     const [albumsData, setAlbumsData] = useState([]);
     const [artistsData, setArtistsData] = useState([]);
@@ -57,14 +58,12 @@ const Search = () => {
             setAlbumsData(res.data.albums);
             setArtistsData(res.data.artists);
             setTracksData(res.data.tracks);
-            setErrorMessage('');
             setIsSubmitting(false);
         })
         .catch(err => {
-            console.log(err.response.data);
-            setSearchData({});
-            setErrorMessage(err.response.data.message);
+            setSearchData(null);
             setIsSubmitting(false);
+            Toast('error', err.response ? err.response.data.message : err.message);
         });
 
     };
@@ -97,8 +96,6 @@ const Search = () => {
 
     return (           
         <Card className={classes.search}>
-            
-            { errorMessage && <p style={ { color: 'red' } }>{errorMessage}</p> }
 
             <form onSubmit={submitHandler}>
                 <div className={classes.row}>

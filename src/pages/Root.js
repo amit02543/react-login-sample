@@ -3,11 +3,13 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer, Slide } from 'react-toastify';
 
 import MainHeader from '../components/MainHeader/MainHeader';
+import Wrapper from '../Helpers/Wrapper';
+
 
 function RootLayout() {
 
     return (
-        <>
+        <Wrapper>
             <MainHeader />
             <main>
                 <Outlet />
@@ -26,7 +28,7 @@ function RootLayout() {
                 transition={Slide}
                 // transition: Slide 
             />
-        </>
+        </Wrapper>
     );
 }
     

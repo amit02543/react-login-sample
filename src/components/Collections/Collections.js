@@ -146,7 +146,7 @@ const Collections = ({ data }) => {
         .catch(err => {
             setEnteredCollection('');
             setIsSubmitting(false);
-            Toast('error', err.response.data.message);
+            Toast('error', err.response ? err.response.data.message : err.message);
         });
 
     };

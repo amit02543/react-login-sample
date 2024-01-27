@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import axios from "axios";
-
 import { BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
 
 import Toast from "../Toast/Toast";
+
+import api from "../../../Helpers/AxiosClient";
 
 import './LikeButton.css';
 
@@ -17,31 +17,37 @@ const LikeButton = ({ type, data, isLiked }) => {
 
     const onTrackLike = async data => {
 
-        const headers = { 
-            'Content-Type': 'application/json'
-        };
+        if(type === 'song') {
+
+            const requestBody = { 
+                id: data.id,
+                title: data.title,
+                artists: data.artists,
+                album: data.album,
+                duration: data.duration,
+                popularity: data.popularity,
+                imageUrl: data.imageUrl,
+                releaseDate: data.releaseDate
+            };
 
 
-        let URL = `http://localhost:8080/user/${username}/likes`;
+            api.addToMySongs(username, requestBody)
+                .then(res => {
+                    setIsSongLiked(true);
+                    const message = <span><b>{data.title}</b> track is added to your music.</span>;
+                    Toast('success', message);
+                })
+                .catch(err => {
+                    setIsSongLiked(false);
+                    Toast('error', err.response ? err.response.data.message : err.message);
+                });
 
+        }
 
-        let requestBody = { 
-            id: data.id,
-            title: data.title,
-            artists: data.artists,
-            album: data.album,
-            duration: data.duration,
-            popularity: data.popularity,
-            imageUrl: data.imageUrl,
-            releaseDate: data.releaseDate
-        };    
-
-
+        
         if(type === 'album') {
 
-            URL = `http://localhost:8080/user/${username}/albums`;
-            
-            requestBody = { 
+            const requestBody = { 
                 id: data.id,
                 name: data.name,
                 artists: data.artists,
@@ -49,27 +55,20 @@ const LikeButton = ({ type, data, isLiked }) => {
                 releaseDate: data.releaseDate,
                 totalTracks: data.totalTracks
             };
-            
+
+
+            api.addToMyAlbums(username, requestBody)
+                .then(res => {
+                    setIsSongLiked(true);
+                    const message = <span><b>{data.name}</b> album is added to your album.</span>;
+                    Toast('success', message);
+                })
+                .catch(err => {
+                    setIsSongLiked(false);
+                    Toast('error', err.response ? err.response.data.message : err.message);
+                });
+
         }
-
-        
-        await axios.post(
-            URL, 
-            JSON.stringify(requestBody),
-            { headers }
-        )
-        .then(res => {
-            setIsSongLiked(true);
-            
-            let message = type === 'album' ? res.data.message : <span><b>{data.title}</b> song is added to your liked music.</span>;
-
-            Toast('success', message);
-        })
-        .catch(err => {
-            setIsSongLiked(false);
-            console.log(err.response.data);
-            Toast('error', err.response.data.message);
-        });
 
     };
 

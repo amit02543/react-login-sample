@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Await, defer, json, useLoaderData } from 'react-router-dom';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 
 import CollectionEdit from '../components/Collections/CollectionEdit';
 import PageContent from '../components/PageContent/PageContent';
@@ -17,7 +17,8 @@ function CollectionEditPage() {
             <Await resolve={collectionByName}>
                 {
                     response => (
-                        <PageContent title={`Edit ${response.name} collection!`}>
+                        <PageContent title={`Update ${response.name} collection!`}>
+                            <p>You can upload image for your music collection here!</p>
                             <CollectionEdit data={response.data} />
                         </PageContent>
                     )
@@ -34,20 +35,6 @@ async function loadUserCollectionByName(collectionName) {
 
     const username = localStorage.getItem('user');
 
-    // const response = await fetch(`http://localhost:8080/user/${username}/collections/${collectionName}/details`);
-
-    // if(!response.ok) {
-    //     throw json(
-    //         { message: 'Could not fetch user collection music'},
-    //         { status: 500 }
-    //     )
-    // }
-
-
-    // const resData = await response.json();
-
-    // return { name: collectionName, data: resData };
-
     let responseData = {
         name: collectionName,
         data: {}
@@ -56,7 +43,7 @@ async function loadUserCollectionByName(collectionName) {
 
     await api.fetchUserCollectionDetailsByName(username, collectionName)
         .then(response => responseData.data = response.data )
-        .catch(err => { Toast('error', err.response.data.message) });
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
     
     return responseData;

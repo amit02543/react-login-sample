@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-import axios from "axios";
-
 import { BsCollectionPlay, BsCollectionPlayFill } from "react-icons/bs";
+
+import Toast from "../Toast/Toast";
+
+import api from "../../../Helpers/AxiosClient";
 
 import './AddCollection.css';
 
@@ -29,11 +31,6 @@ const AddCollection = (props) => {
     const onCollectionChangeHandler = async (event, data) => {
 
         setSelectedCollection(event.target.value);
-
-        const headers = { 
-            'Content-Type': 'application/json'
-        };
-
 
         let requestBody = {
             username: username,
@@ -70,16 +67,21 @@ const AddCollection = (props) => {
 
         }
         
-        await axios.post(
-            `http://localhost:8080/collections`, 
-            JSON.stringify(requestBody),
-            { headers }
-        )
+        
+        api.addToCollection(requestBody)
         .then(res => {
-            console.log(res);
+            let message; 
+
+            if(props.type === 'album') {
+                message = <span><b>{data.name}</b> album is added to {event.target.value} collection.</span>;
+            } else {
+                message = <span><b>{data.title}</b> track is added to {event.target.value} collection.</span>;
+            }
+
+            Toast('success', message);
         })
         .catch(err => {
-            console.log(err.response.data);
+            Toast('error', err.response ? err.response.data.message : err.message);
         });
 
         setIsDisabled(true);

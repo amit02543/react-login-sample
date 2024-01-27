@@ -35,11 +35,11 @@ async function loadUserAlbums() {
 
     const username = localStorage.getItem('user');
 
-    let responseData;
+    let responseData = [];
 
     await api.fetchLikedAlbums(username)
         .then(response => responseData = response.data )
-        .catch(err => Toast('error', err.response.data.message));
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message ));
         
 
     return responseData;

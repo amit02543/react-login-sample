@@ -45,9 +45,9 @@ export async function action({ request }) {
                 confirmPassword: ''
             }; 
         })
-        .catch(err => { 
-            Toast('error', err.response.data.message); 
-            error = err.response.data 
+        .catch(err => {
+            Toast('error', err.response ? err.response.data.message : err.message);
+            error = err.response ? err.response.data : err;
         });
 
 

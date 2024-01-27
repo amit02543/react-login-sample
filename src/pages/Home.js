@@ -41,14 +41,16 @@ async function loadRandomMusic() {
     };
 
 
+    
     await api.fetchRandomSongs(username)
         .then(response => responseData.tracks = response.data.tracks )
-        .catch(err => Toast('error', err.response.data.message));
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
+    
     
     await api.fetchUserCollection(username)
         .then(response => responseData.collections = response.data )
-        .catch(err => Toast('error', err.response.data.message));
+        .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
 
     return responseData;

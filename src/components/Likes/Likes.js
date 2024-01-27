@@ -4,6 +4,8 @@ import Track from '../Search/Track';
 import Card from '../UI/Card/Card';
 import View from '../UI/View/View';
 
+import Wrapper from '../../Helpers/Wrapper';
+
 import './Likes.css';
 
 const Likes = ({ data }) => {
@@ -44,14 +46,14 @@ const Likes = ({ data }) => {
 
 
     return (
-        <>
+        <Wrapper>
             <View checkedValue={selectedView} onChange={viewChangeHandler} />
             <Card className='likes'>
                 { !userSongs && <p><b>You have not liked any songs yet.</b></p> }
                 { userSongs && userSongs.length === 0 && <p><b>You have not liked any songs yet.</b></p> }
                 { userSongs && tracks }
             </Card>
-        </>        
+        </Wrapper>
     );
 };
 

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { FaImage } from "react-icons/fa";
 
-import axios from "axios";
-
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import Input from "../UI/Input/Input";
 import Toast from "../UI/Toast/Toast";
 
 import api from "../../Helpers/AxiosClient";
+import Wrapper from '../../Helpers/Wrapper';
 
 import classes from './CollectionEdit.module.css';
 
@@ -54,7 +53,7 @@ const CollectionEdit = ({ data }) => {
             setIsSubmitting(false);
             setIsFileSelector(false);
             setIsDisabled(false);
-            Toast('error', err.response.data.message);
+            Toast('error', err.response ? err.response.data.message : err.message);
         });
         
     };
@@ -73,7 +72,7 @@ const CollectionEdit = ({ data }) => {
 
 
     return (
-        <>
+        <Wrapper>
             { isFileSelector && 
                 <div className={classes.overlay}>
                     <div className={classes.control}>
@@ -137,7 +136,7 @@ const CollectionEdit = ({ data }) => {
                     />
                 </div>
             </Card>
-        </>
+        </Wrapper>
     )
 };
 
