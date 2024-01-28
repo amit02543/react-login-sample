@@ -5,7 +5,7 @@ import MusicAction from "../UI/Button/MusicAction";
 import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
-import Wrapper from '../../Helpers/Wrapper';
+import Wrapper from '../../helpers/Wrapper';
 
 import './NewMusic.css';
 

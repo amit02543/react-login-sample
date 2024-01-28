@@ -4,7 +4,7 @@ import PageContent from '../components/PageContent/PageContent';
 import Register from '../components/Register/Register';
 import Toast from '../components/UI/Toast/Toast';
 
-import api from '../Helpers/AxiosClient';
+import api from '../helpers/AxiosClient';
 
 
 function RegisterPage() {

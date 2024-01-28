@@ -6,8 +6,8 @@ import Card from "../UI/Card/Card";
 import Input from "../UI/Input/Input";
 import Toast from "../UI/Toast/Toast";
 
-import api from "../../Helpers/AxiosClient";
-import Wrapper from '../../Helpers/Wrapper';
+import api from "../../helpers/AxiosClient";
+import Wrapper from '../../helpers/Wrapper';
 
 import classes from './CollectionEdit.module.css';
 

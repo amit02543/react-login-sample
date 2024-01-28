@@ -5,7 +5,7 @@ import CollectionDetails from '../components/Collections/CollectionDetails';
 import PageContent from '../components/PageContent/PageContent';
 import Toast from '../components/UI/Toast/Toast';
 
-import api from '../Helpers/AxiosClient';
+import api from '../helpers/AxiosClient';
 
 
 function CollectionDetailsPage() {

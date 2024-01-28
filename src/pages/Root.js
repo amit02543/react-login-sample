@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer, Slide } from 'react-toastify';
 
 import MainHeader from '../components/MainHeader/MainHeader';
-import Wrapper from '../Helpers/Wrapper';
+import Wrapper from '../helpers/Wrapper';
 
 
 function RootLayout() {

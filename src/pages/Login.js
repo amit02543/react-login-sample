@@ -4,7 +4,7 @@ import Login from '../components/Login/Login';
 import PageContent from '../components/PageContent/PageContent';
 import Toast from '../components/UI/Toast/Toast';
 
-import api from '../Helpers/AxiosClient';
+import api from '../helpers/AxiosClient';
 
 
 function LoginPage() {

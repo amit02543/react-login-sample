@@ -4,7 +4,7 @@ import { BsCollectionPlay, BsCollectionPlayFill } from "react-icons/bs";
 
 import Toast from "../Toast/Toast";
 
-import api from "../../../Helpers/AxiosClient";
+import api from "../../../helpers/AxiosClient";
 
 import './AddCollection.css';
 

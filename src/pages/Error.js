@@ -2,7 +2,7 @@ import { useRouteError } from 'react-router-dom';
 
 import MainHeader from '../components/MainHeader/MainHeader';
 import PageContent from '../components/PageContent/PageContent';
-import Wrapper from '../Helpers/Wrapper';
+import Wrapper from '../helpers/Wrapper';
 
 
 function ErrorPage() {

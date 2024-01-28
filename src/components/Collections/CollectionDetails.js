@@ -6,7 +6,7 @@ import Track from "../Search/Track";
 import Card from "../UI/Card/Card";
 import View from "../UI/View/View";
 
-import Wrapper from '../../Helpers/Wrapper';
+import Wrapper from '../../helpers/Wrapper';
 
 import './CollectionDetails.css';
 
