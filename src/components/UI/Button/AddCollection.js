@@ -17,7 +17,7 @@ const AddCollection = (props) => {
     const [selectedCollection, setSelectedCollection] = useState(props.selectedCollection);
 
     const collectionOptions = props.collections && props.collections.map(collection => {
-        return <option key={collection.id} value={collection.name}>{collection.name}</option>
+        return <option key={collection.name} value={collection.name}>{collection.name}</option>
     });
 
     collectionOptions && collectionOptions.unshift(<option key="" value="" disabled={true}> -- Select Collection -- </option>);

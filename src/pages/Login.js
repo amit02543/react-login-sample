@@ -33,9 +33,11 @@ export async function action({ request }) {
     let error;
 
 
+    Toast('info', 'Logging in...');
+
     await api.login(loginData)
         .then(response => { 
-            Toast('success', response.data.message);
+            Toast('success', "User logged in successfully");
             responseData = response.data; 
         })
         .catch(err => {

@@ -9,11 +9,14 @@ const Toast = (type, message) => {
     const options = {
         position: toastPosition || "bottom-center",
         autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
+        hideProgressBar: false,
         pauseOnHover: true,
+        pauseOnFocusLoss: false,
+        newestOnTop: true,
+        closeOnClick: true,
         draggable: true,
-        progress: undefined,
+        stacked: true,
+        limit: 1,
         theme: "dark",
         transition: Slide
     };

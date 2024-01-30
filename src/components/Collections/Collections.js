@@ -106,7 +106,7 @@ const Collections = ({ data }) => {
         const updatedDate = new Date(collection.lastUpdatedDate).toLocaleString("en-US", {month: 'short', day: 'numeric', year: 'numeric'});
 
         return (
-            <div className={classes.collection} key={collection.id}>
+            <div className={classes.collection} key={collection.name}>
                 <Link to={`/collections/${collection.name}/edit`}><MdEdit /></Link>
                 <Link to={`/collections/${collection.name}`}>
                     { collection.imageUrl && <img src={collection.imageUrl} alt="Collection" /> }
@@ -128,15 +128,16 @@ const Collections = ({ data }) => {
 
         const username = localStorage.getItem('user');
 
-        const collectionData = {
+        const addCollectionData = {
             userName: username,
             collectionName: enteredCollection
         };
 
 
-        api.addUserCollection(username, collectionData)
+        api.addUserCollection(username, addCollectionData)
         .then(res => {
-            setCollectionData(res.data);
+            const updatedCollections = [...collectionData, res.data];
+            setCollectionData(updatedCollections);
             setEnteredCollection('');
             setIsSubmitting(false);
 

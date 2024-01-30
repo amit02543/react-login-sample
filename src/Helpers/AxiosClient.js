@@ -47,10 +47,12 @@ const uploadImageHeaders = {
 
 const api = {
 
+    // Authentication APIs
+
     login: async (data) => {
         
         try {
-            const response = await axiosClient.post('v1/login', JSON.stringify(data))
+            const response = await axiosClient.post('v1/auth-management/login', JSON.stringify(data))
             return response;
         } catch(error) {
             throw error;
@@ -62,7 +64,7 @@ const api = {
     register: async (data) => {
         
         try {
-            const response = await axiosClient.post('v1/register', JSON.stringify(data))
+            const response = await axiosClient.post('v1/auth-management/register', JSON.stringify(data))
             return response;
         } catch(error) {
             throw error;
@@ -70,6 +72,8 @@ const api = {
         
     },
 
+
+    // Spotify APIs
 
     fetchRandomSongs: async (username) =>  { 
 
@@ -98,7 +102,7 @@ const api = {
     fetchResultBySearchTermAndType: async (query, type) => { 
 
         try {
-            const response = await axiosClient.get(`v1/spotify/search?query=${query}&type=${type}`);
+            const response = await axiosClient.get(`v1/spotify/search?query=${query}&type=${type}`); //Might need to send username to show already liked songs and albums
             return response;
         } catch(error) {
             throw error;
@@ -107,10 +111,12 @@ const api = {
     },
 
 
+    // Profile APIs
+
     fetchUserProfile: async (username) => { 
 
         try {
-            const response = await axiosClient.get(`v1/profile/${username}`);
+            const response = await axiosClient.get(`v1/user-management/users/${username}/profile`);
             return response;
         } catch(error) {
             throw error;
@@ -122,7 +128,7 @@ const api = {
     updateUserProfile: async (username, data) => { 
 
         try {
-            const response = await axiosClient.put(`v1/profile/${username}`, JSON.stringify(data));
+            const response = await axiosClient.put(`v1/user-management/users/${username}/profile`, JSON.stringify(data));
             return response;
         } catch(error) {
             throw error;
@@ -134,7 +140,7 @@ const api = {
     uploadUserProfileImage: async (username, data) => { 
 
         try {
-            const response = await axiosClient.post(`v1/profile/${username}/upload-image`, data, uploadImageHeaders);
+            const response = await axiosClient.post(`v1/user-management/users/${username}/profile/upload-image`, data, uploadImageHeaders);
             return response;
         } catch(error) {
             throw error;
@@ -146,7 +152,7 @@ const api = {
     fetchUserProfileImage: async (username) => { 
 
         try {
-            const response = await axiosClient.get(`v1/profile/${username}/profile-image`);
+            const response = await axiosClient.get(`v1/user-management/users/${username}/profile/profile-image`);
             return response;
         } catch(error) {
             throw error;
@@ -154,11 +160,37 @@ const api = {
 
     },
 
+
+    deleteUserProfileImage: async (username) => { 
+
+        try {
+            const response = await axiosClient.delete(`v1/user-management/users/${username}/profile/profile-image`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    deleteUser: async (username) => { 
+
+        try {
+            const response = await axiosClient.delete(`v1/user-management/users/${username}`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    // My Album APIs
     
     fetchLikedAlbums: async (username) => { 
 
         try {
-            const response = await axiosClient.get(`v1/user/${username}/albums`);
+            const response = await axiosClient.get(`/v1/album-management/users/${username}/albums`);
             return response;
         } catch(error) {
             throw error;
@@ -170,7 +202,31 @@ const api = {
     addToMyAlbums: async (username, data) => { 
 
         try {
-            const response = await axiosClient.post(`v1/user/${username}/albums`, JSON.stringify(data));
+            const response = await axiosClient.post(`/v1/album-management/users/${username}/albums`, JSON.stringify(data));
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+    
+
+    fetchLikedAlbumById: async (username, albumId) => { 
+
+        try {
+            const response = await axiosClient.get(`/v1/album-management/users/${username}/albums/${albumId}`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+    
+
+    deleteLikedAlbumById: async (username, albumId) => { 
+
+        try {
+            const response = await axiosClient.delete(`/v1/album-management/users/${username}/albums/${albumId}`);
             return response;
         } catch(error) {
             throw error;
@@ -179,10 +235,12 @@ const api = {
     },
 
 
+    // My Song APIs
+
     fetchLikedSongs: async (username) => { 
 
         try {
-            const response = await axiosClient.get(`v1/user/${username}/songs`);
+            const response = await axiosClient.get(`/v1/song-management/users/${username}/songs`);
             return response;
         } catch(error) {
             throw error;
@@ -194,7 +252,7 @@ const api = {
     addToMySongs: async (username, data) => { 
 
         try {
-            const response = await axiosClient.post(`v1/user/${username}/songs`, JSON.stringify(data));
+            const response = await axiosClient.post(`/v1/song-management/users/${username}/songs`, JSON.stringify(data));
             return response;
         } catch(error) {
             throw error;
@@ -203,10 +261,10 @@ const api = {
     },
 
 
-    addToCollection: async (data) => { 
+    fetchLikedSongById: async (username, songId) => { 
 
         try {
-            const response = await axiosClient.post(`v1/collections`, JSON.stringify(data));
+            const response = await axiosClient.get(`/v1/song-management/users/${username}/songs/${songId}`);
             return response;
         } catch(error) {
             throw error;
@@ -214,11 +272,26 @@ const api = {
 
     },
 
+
+    deleteLikedSongById: async (username, songId) => { 
+
+        try {
+            const response = await axiosClient.delete(`/v1/song-management/users/${username}/songs/${songId}`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+
+    // User Collection APIs
     
     fetchUserCollection: async (username) =>  { 
 
         try {
-            const response = await axiosClient.get(`v1/user/${username}/collections`);
+            const response = await axiosClient.get(`v1/user-collection-management/users/${username}/collections`);
             return response;
         } catch(error) {
             throw error;
@@ -230,19 +303,7 @@ const api = {
     addUserCollection: async (username, data) => { 
 
         try {
-            const response = await axiosClient.post(`v1/user/${username}/collections`, data);
-            return response;
-        } catch(error) {
-            throw error;
-        }
-
-    },
-
-
-    fetchUserCollectionByName: async (username, collectionName) => { 
-
-        try {
-            const response = await axiosClient.get(`v1/user/${username}/collections/${collectionName}`);
+            const response = await axiosClient.post(`v1/user-collection-management/users/${username}/collections`, data);
             return response;
         } catch(error) {
             throw error;
@@ -254,7 +315,31 @@ const api = {
     fetchUserCollectionDetailsByName: async (username, collectionName) => { 
 
         try {
-            const response = await axiosClient.get(`v1/user/${username}/collections/${collectionName}/details`);
+            const response = await axiosClient.get(`v1/user-collection-management/users/${username}/collections/${collectionName}`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    updateUserCollectionDetailsByName: async (username, collectionName, data) => { 
+
+        try {
+            const response = await axiosClient.put(`v1/user-collection-management/users/${username}/collections/${collectionName}`, JSON.stringify(data));
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    deleteUserCollectionByName: async (username, collectionName) => { 
+
+        try {
+            const response = await axiosClient.delete(`v1/user-collection-management/users/${username}/collections/${collectionName}`);
             return response;
         } catch(error) {
             throw error;
@@ -266,13 +351,77 @@ const api = {
     uploadUserCollectionImage: async (username, collectionName, data) => { 
 
         try {
-            const response = await axiosClient.post(`v1/user/${username}/collections/${collectionName}/upload`, data, uploadImageHeaders);
+            const response = await axiosClient.post(`v1/user-collection-management/users/${username}/collections/${collectionName}/upload-image`, data, uploadImageHeaders);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    removeUserCollectionImage: async (username, collectionName) => { 
+
+        try {
+            const response = await axiosClient.delete(`v1/user-collection-management/users/${username}/collections/${collectionName}/image`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    // Collection APIs
+
+    fetchUserCollectionItemsByName: async (username, collectionName) => { 
+
+        try {
+            const response = await axiosClient.get(`v1/collection-management/collections?filter=byNameAndUsername&username=${username}&name=${collectionName}`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+
+
+    addToCollection: async (data) => { 
+
+        try {
+            const response = await axiosClient.post(`v1/collection-management/collections`, JSON.stringify(data));
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+    
+
+    deleteUserCollectionItemsByName: async (username, collectionName) => { 
+
+        try {
+            const response = await axiosClient.delete(`v1/collection-management/collections?filter=byNameAndUsername&username=${username}&name=${collectionName}`);
+            return response;
+        } catch(error) {
+            throw error;
+        }
+
+    },
+    
+
+    deleteUserCollectionItemsByNameAndId: async (username, collectionName, spotifyId) => { 
+
+        try {
+            const response = await axiosClient.delete(`v1/collection-management/collections?filter=byNameAndUsernameAndId&username=${username}&name=${collectionName}&id=${spotifyId}`);
             return response;
         } catch(error) {
             throw error;
         }
 
     }
+
+
 
 }
 

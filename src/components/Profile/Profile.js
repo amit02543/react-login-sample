@@ -69,7 +69,7 @@ const Profile = ({ data }) => {
 
 
     const nameChangeHandler = event => {
-        setEnteredName(event.target.value.trim());
+        setEnteredName(event.target.value);
     
         setFormIsValid(
             event.target.value.trim().length > 2
@@ -119,7 +119,7 @@ const Profile = ({ data }) => {
 
     const updateProfilePictureHandler = () => {
         
-        if(!data.username) {
+        if(data.username) {
             setIsFileSelector(true);
         } else {
             Toast('info', 'Action is not allowed at this moment. Please try again later.');

@@ -35,9 +35,11 @@ export async function action({ request }) {
     let error;
 
 
+    Toast('info', 'Registering...');
+
     await api.register(registerData)
         .then(response => { 
-            Toast('success', response.data.message); 
+            Toast('success', "User is register successfully"); 
             responseData = {
                 username: '',
                 email: '',

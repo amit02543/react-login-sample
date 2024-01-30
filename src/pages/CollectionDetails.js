@@ -40,7 +40,7 @@ async function loadUserCollectionMusicByName(collectionName) {
         data: []
     };
 
-    await api.fetchUserCollectionByName(username, collectionName)
+    await api.fetchUserCollectionItemsByName(username, collectionName)
         .then(response => responseData.data = response.data)
         .catch(err => Toast('error', err.response ? err.response.data.message : err.message));
 
